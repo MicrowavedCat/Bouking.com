@@ -8,7 +8,7 @@ public class Travel {
 	private final static float FIRST_CLASS_EXTRA = 0.40f;
 	private final static float BUSINESS_CLASS_EXTRA = 0.20f;
 	private final static float STANDARD_CLASS_EXTRA = 0f;
-	private final static int FLEXIBLE_PRICE = 35;
+	private final static int FLEXIBLE_EXTRA = 35;
 	
 	private int trainID;
 	private int ticketsFirst;
@@ -34,21 +34,29 @@ public class Travel {
 		this.arrivalDate = rs.getDate("arrival_date");
 	}
 	
-	public String toResponse() {
+	public String toResponseBodyFormat() {
 		BodyParser bb = new BodyParser();
+		int firstPrice = this.basePrice + Math.round(this.basePrice * FIRST_CLASS_EXTRA);
+		int businessPrice = this.basePrice + Math.round(this.basePrice * BUSINESS_CLASS_EXTRA);
+		int standardPrice = this.basePrice + Math.round(this.basePrice * STANDARD_CLASS_EXTRA);
 		
 		bb.newBlock();
 		bb.put("trainID", Integer.toString(this.trainID));
-		bb.newBlock();
-		bb.put("trainID", Integer.toString(this.trainID + 10));
-		System.out.print(bb.make());
-		System.out.println("-------------------------------");
-		
-		BodyParser bb2 = new BodyParser(bb.make());
-		System.out.print(bb2.make());
-		System.out.println("-------------------------------");
-		while(bb2.next())
-			System.out.println(bb2.get("trainID"));
+		bb.put("numberOfFirstClass", Integer.toString(this.ticketsFirst));
+		bb.put("numberOfBusinessClass", Integer.toString(this.ticketsBusiness));
+		bb.put("numberOfStandardClass", Integer.toString(this.ticketsStandard));
+		bb.put("flexibleExtraPrice", Integer.toString(FLEXIBLE_EXTRA));
+		bb.put("firstClassPrice", Integer.toString(firstPrice));
+		bb.put("businessClassPrice", Integer.toString(businessPrice));
+		bb.put("standardClassPrice", Integer.toString(standardPrice));
+		bb.put("flexibleFirstClassPrice", Integer.toString(firstPrice + FLEXIBLE_EXTRA));
+		bb.put("flexibleBusinessClassPrice", Integer.toString(businessPrice + FLEXIBLE_EXTRA));
+		bb.put("flexibleStandardClassPrice", Integer.toString(standardPrice + FLEXIBLE_EXTRA));
+		bb.put("company", this.company);
+		bb.put("departureStation", this.departureStation);
+		bb.put("arrivalStation", this.arrivalStation);
+		bb.put("departureDate", Long.toString(this.departureDate.getTime()));
+		bb.put("arrivalDate", Long.toString(this.arrivalDate.getTime()));
 		
 		return bb.make();
 	}

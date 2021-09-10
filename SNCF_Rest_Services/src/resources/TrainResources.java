@@ -24,9 +24,9 @@ public class TrainResources extends ServerResource {
 			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database error"));
 		}
 		
+		Travel travel;
 		try {
-			Travel t = db.getTravelsInfo(trainID);
-			System.out.println(t.toResponse());
+			travel = db.getTravelsInfo(trainID);
 		} catch (SQLException e) {
 			System.err.println("Database request error :");
 			e.printStackTrace();
@@ -34,7 +34,6 @@ public class TrainResources extends ServerResource {
 		}
 		
 		db.close();
-		return "SNCF\n Paris\n La Creuse :(\n 2021-12-12 23:59:59\n 2021-12-12 23:59:59\n 50\n 1 100\n 2 120\n 3 140\n 15\n\n"
-					+ "SNCF\n Paris\n La Creuse :(\n 2021-12-12 23:59:59\n 2021-12-12 23:59:59\n 50\n 1 100\n 2 120\n 3 140\n 15\n\n";
+		return travel.toResponseBodyFormat();
 	}
 }
