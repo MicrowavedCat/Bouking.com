@@ -48,6 +48,7 @@ public class Database {
 		try {
 			CONNECTION.close();
 		} catch (SQLException e) {
+			System.err.println("Database close error");
 			e.printStackTrace();
 		}
 	}

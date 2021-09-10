@@ -25,8 +25,9 @@ public class TravelsResources extends ServerResource {
 		try {
 			db = new Database();
 		} catch (SQLException e) {
+			System.err.println("Database connection error :");
 			e.printStackTrace();
-			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database connection error"));
+			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database error"));
 		}
 		
 		db.close();

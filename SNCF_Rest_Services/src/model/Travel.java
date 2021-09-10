@@ -35,6 +35,21 @@ public class Travel {
 	}
 	
 	public String toResponse() {
-		return "";
+		BodyParser bb = new BodyParser();
+		
+		bb.newBlock();
+		bb.put("trainID", Integer.toString(this.trainID));
+		bb.newBlock();
+		bb.put("trainID", Integer.toString(this.trainID + 10));
+		System.out.print(bb.make());
+		System.out.println("-------------------------------");
+		
+		BodyParser bb2 = new BodyParser(bb.make());
+		System.out.print(bb2.make());
+		System.out.println("-------------------------------");
+		while(bb2.next())
+			System.out.println(bb2.get("trainID"));
+		
+		return bb.make();
 	}
 }
