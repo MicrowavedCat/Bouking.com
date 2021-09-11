@@ -20,6 +20,10 @@ public class BodyParser {
 	public void newBlock() {
 		this.blocks.add(new BodyBlock());
 	}
+	
+	public int count() {
+		return this.blocks.size();
+	}
 
 	public void put(String key, String value) {
 		this.blocks.get(this.blocks.size() - 1).put(key, value);

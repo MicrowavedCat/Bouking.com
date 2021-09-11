@@ -35,29 +35,29 @@ public class Travel {
 	}
 	
 	public String toResponseBodyFormat() {
-		BodyParser bb = new BodyParser();
+		BodyParser bp = new BodyParser();
 		int firstPrice = this.basePrice + Math.round(this.basePrice * FIRST_CLASS_EXTRA);
 		int businessPrice = this.basePrice + Math.round(this.basePrice * BUSINESS_CLASS_EXTRA);
 		int standardPrice = this.basePrice + Math.round(this.basePrice * STANDARD_CLASS_EXTRA);
 		
-		bb.newBlock();
-		bb.put("trainID", Integer.toString(this.trainID));
-		bb.put("numberOfFirstClass", Integer.toString(this.ticketsFirst));
-		bb.put("numberOfBusinessClass", Integer.toString(this.ticketsBusiness));
-		bb.put("numberOfStandardClass", Integer.toString(this.ticketsStandard));
-		bb.put("flexibleExtraPrice", Integer.toString(FLEXIBLE_EXTRA));
-		bb.put("firstClassPrice", Integer.toString(firstPrice));
-		bb.put("businessClassPrice", Integer.toString(businessPrice));
-		bb.put("standardClassPrice", Integer.toString(standardPrice));
-		bb.put("flexibleFirstClassPrice", Integer.toString(firstPrice + FLEXIBLE_EXTRA));
-		bb.put("flexibleBusinessClassPrice", Integer.toString(businessPrice + FLEXIBLE_EXTRA));
-		bb.put("flexibleStandardClassPrice", Integer.toString(standardPrice + FLEXIBLE_EXTRA));
-		bb.put("company", this.company);
-		bb.put("departureStation", this.departureStation);
-		bb.put("arrivalStation", this.arrivalStation);
-		bb.put("departureDate", Long.toString(this.departureDate.getTime()));
-		bb.put("arrivalDate", Long.toString(this.arrivalDate.getTime()));
+		bp.newBlock();
+		bp.put("trainID", Integer.toString(this.trainID));
+		bp.put("numberOfFirstClass", Integer.toString(this.ticketsFirst));
+		bp.put("numberOfBusinessClass", Integer.toString(this.ticketsBusiness));
+		bp.put("numberOfStandardClass", Integer.toString(this.ticketsStandard));
+		bp.put("flexibleExtraPrice", Integer.toString(FLEXIBLE_EXTRA));
+		bp.put("firstClassPrice", Integer.toString(firstPrice));
+		bp.put("businessClassPrice", Integer.toString(businessPrice));
+		bp.put("standardClassPrice", Integer.toString(standardPrice));
+		bp.put("flexibleFirstClassPrice", Integer.toString(firstPrice + FLEXIBLE_EXTRA));
+		bp.put("flexibleBusinessClassPrice", Integer.toString(businessPrice + FLEXIBLE_EXTRA));
+		bp.put("flexibleStandardClassPrice", Integer.toString(standardPrice + FLEXIBLE_EXTRA));
+		bp.put("company", this.company);
+		bp.put("departureStation", this.departureStation);
+		bp.put("arrivalStation", this.arrivalStation);
+		bp.put("departureDate", Long.toString(this.departureDate.getTime()));
+		bp.put("arrivalDate", Long.toString(this.arrivalDate.getTime()));
 		
-		return bb.make();
+		return bp.make();
 	}
 }
