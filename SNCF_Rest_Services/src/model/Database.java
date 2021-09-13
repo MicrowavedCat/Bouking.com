@@ -1,23 +1,29 @@
 package model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Database {
 	private final static String URL = "jdbc:mariadb://192.168.192.5:3306/";
 	private final static String USER = "wsclient";
 	private final static String PASSWORD = "wsclient";
-	private final static String COMPANY = "SNCF";
+	public final static String COMPANY = "SNCF";
 	
 	private static Connection CONNECTION;
 	
 	public Database() throws SQLException {
-		CONNECTION = DriverManager.getConnection(URL + "Boukings?user=" + USER + "&password=" + PASSWORD);
+		CONNECTION = DriverManager.getConnection(URL + COMPANY + "?user=" + USER + "&password=" + PASSWORD);
 	}
 	
 	public Travel getTravelInfo(int trainID) throws SQLException {
 		Statement stmt = CONNECTION.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Travels WHERE company = '" + COMPANY + "' AND train_id = " + trainID);
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Travels WHERE train_id = " + trainID);
 		Travel travel = null;
 		
 		while(rs.next()) {
@@ -30,25 +36,8 @@ public class Database {
 		return travel;
 	}
 	
-	public Travel[] getTravelsInfo(int numberOfTickets, TicketClass ticketClass, String departureStation, String arrivalStation, String departureDate, String arrivalDate) throws SQLException {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Travels WHERE company = '" + COMPANY + "' AND ");
-		
-		if(ticketClass != null) {			
-			switch(ticketClass) {
-				case FIRST:
-					sql.append("nb_first_class >= ");
-					break;
-				case BUSINESS:
-					sql.append("nb_business_class >= ");
-					break;
-				default:
-					sql.append("nb_standard_class >= ");
-					break;
-			}
-			
-			sql.append(numberOfTickets);
-		} else
-			sql.append("nb_first_class >= " + numberOfTickets + " AND nb_business_class >= " + numberOfTickets + " AND nb_standard_class >= " + numberOfTickets);
+	public Travel[] getTravelsInfo(int nbTicketsFirst, int nbTicketsBusiness, int nbTicketsStandard, String departureStation, String arrivalStation, long departureDate, long arrivalDate) throws SQLException {
+		StringBuilder sql = new StringBuilder("SELECT * FROM Travels WHERE nb_first_class >= " + nbTicketsFirst + " AND nb_business_class >= " + nbTicketsBusiness + " AND nb_standard_class >= " + nbTicketsStandard);
 		
 		if(departureStation != null)
 			sql.append(" AND departure_station = '" + departureStation + "'");
@@ -56,11 +45,31 @@ public class Database {
 		if(arrivalStation != null)
 			sql.append(" AND arrival_station = '" + arrivalStation + "'");
 		
-		if(departureDate != null)
-			sql.append(" AND departure_date = '" + departureDate + "'");
+		if(departureDate > 0) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(departureDate);
+			
+			c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
+			c.set(Calendar.HOUR_OF_DAY, 0);
+			c.set(Calendar.MINUTE, 0);
+			c.set(Calendar.SECOND, 0);
+			c.set(Calendar.MILLISECOND, 0);
+			
+			sql.append(" AND departure_date >= " + departureDate + " AND departure_date < " + c.getTimeInMillis());
+		}
 		
-		if(arrivalDate != null)
-			sql.append(" AND arrival_date = '" + arrivalDate + "'");
+		if(arrivalDate > 0) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(arrivalDate);
+			
+			c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
+			c.set(Calendar.HOUR_OF_DAY, 0);
+			c.set(Calendar.MINUTE, 0);
+			c.set(Calendar.SECOND, 0);
+			c.set(Calendar.MILLISECOND, 0);
+			
+			sql.append(" AND arrival_date >= " + arrivalDate + " AND arrival_date < " + c.getTimeInMillis());
+		}
 		
 		Statement stmt = CONNECTION.createStatement();
 		ResultSet rs = stmt.executeQuery(sql.toString());
@@ -74,6 +83,50 @@ public class Database {
 		stmt.close();
 		
 		return (Travel[]) travels.toArray(new Travel[travels.size()]);
+	}
+	
+	public Ticket getTicketInfo(int ticketID) throws SQLException {
+		Statement stmt = CONNECTION.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Tickets WHERE ticket_id = " + ticketID);
+		Ticket ticket = null;
+		
+		while(rs.next()) {
+			ticket = new Ticket(rs);
+		}
+		
+		rs.close();
+		stmt.close();
+		
+		return ticket;
+	}
+	
+	public void buy(int trainID, TicketClass ticketClass, boolean flexible, int price) throws SQLException {
+		StringBuilder updateSql = new StringBuilder("UPDATE Travels SET ");
+		StringBuilder createSql = new StringBuilder("INSERT INTO Tickets (train_id, flexible, price, class) VALUES (" + trainID + ", " + flexible + ", " + price + ", " + ticketClass.toString() + ")");
+		
+		switch(ticketClass) {
+			case FIRST:
+				updateSql.append("nb_first_class = nb_first_class - 1");
+				break;
+			case BUSINESS:
+				updateSql.append("nb_business_class = nb_business_class - 1");
+				break;
+			case STANDARD:
+				updateSql.append("nb_standard_class = nb_standard_class - 1");
+				break;
+		}
+		
+		updateSql.append("WHERE train_id = " + trainID);
+		
+		Statement stmt = CONNECTION.createStatement();
+		
+		if(stmt.executeUpdate(createSql.toString()) == 0)
+			throw new SQLException("Nothing inserted : inserted rows = 0");
+		
+		if(stmt.executeUpdate(updateSql.toString()) == 0)
+			throw new SQLException("Nothing updated : updated rows = 0");
+		
+		stmt.close();
 	}
 	
 	public void close() {

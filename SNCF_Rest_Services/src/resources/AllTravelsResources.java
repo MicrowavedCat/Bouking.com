@@ -28,35 +28,45 @@ public class AllTravelsResources extends ServerResource {
 		
 		Travel[] travels = null;
 		try {
-			int numberOfTickets = 1;
-			if(param.isSet("numberOfTickets")) {
-				numberOfTickets = param.getInt("numberOfTickets");
+			int nbTicketsFirst = 0;
+			int nbTicketsBusiness = 0;
+			int nbTicketsStandard = 0;
+			
+			if(param.isSet("nbTicketsFirst")) {
+				nbTicketsFirst = param.getInt("nbTicketsFirst");
 				
-				if(numberOfTickets < 1)
-					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of tickets cannot be inferior to 1"));
+				if(nbTicketsFirst < 1)
+					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of first class tickets requested cannot be inferior to 1"));
 			}
 			
-			TicketClass ticketClass = null;
-			if(param.isSet("ticketClass")) {
-				ticketClass = param.getTicketClass("ticketClass");
+			if(param.isSet("nbTicketsBusiness")) {
+				nbTicketsBusiness = param.getInt("nbTicketsBusiness");
 				
-				if(ticketClass == null)
-					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The ticket class is unknown. Allowed classes : " + TicketClass.toString(TicketClass.FIRST) + " or " + TicketClass.toString(TicketClass.BUSINESS) + " or " + TicketClass.toString(TicketClass.STANDARD)));
+				if(nbTicketsBusiness < 1)
+					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of business class tickets requested cannot be inferior to 1"));
+			}
+			
+			if(param.isSet("nbTicketsStandard")) {
+				nbTicketsStandard = param.getInt("nbTicketsStandard");
+				
+				if(nbTicketsStandard < 1)
+					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of standard class tickets requested cannot be inferior to 1"));
 			}
 
 			String departureStation = param.isSet("departureStation") ? param.getString("departureStation") : null;
 			String arrivalStation = param.isSet("arrivalStation") ? param.getString("arrivalStation") : null;
-			String departureDate = param.isSet("departureDate") ? param.getString("departureDate") : null;
-			String arrivalDate = param.isSet("arrivalDate") ? param.getString("arrivalDate") : null;
+			long departureDate = param.isSet("departureDate") ? param.getLong("departureDate") : -1;
+			long arrivalDate = param.isSet("arrivalDate") ? param.getLong("arrivalDate") : -1;
 
-			System.out.println("not = " + numberOfTickets);
-			System.out.println("tc = " + ticketClass);
+			System.out.println("nbtf = " + nbTicketsFirst);
+			System.out.println("nbtb = " + nbTicketsBusiness);
+			System.out.println("nbts = " + nbTicketsStandard);
 			System.out.println("ds = " + departureStation);
 			System.out.println("as = " + arrivalStation);
 			System.out.println("dd = " + departureDate);
 			System.out.println("ad = " + arrivalDate);
 
-			travels = db.getTravelsInfo(numberOfTickets, ticketClass, departureStation, arrivalStation, departureDate, arrivalDate);
+			travels = db.getTravelsInfo(nbTicketsFirst, nbTicketsBusiness, nbTicketsStandard, departureStation, arrivalStation, departureDate, arrivalDate);
 		} catch (SQLException e) {
 			System.err.println("Database request error :");
 			e.printStackTrace();

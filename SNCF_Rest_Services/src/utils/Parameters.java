@@ -25,6 +25,10 @@ public class Parameters {
 		return (this.isSet(param) ? Integer.parseInt(this.getParameter(param)) : -1);
 	}
 	
+	public long getLong(String param) {		
+		return (this.isSet(param) ? Long.parseLong(this.getParameter(param)) : -1);
+	}
+	
 	public String getString(String param) {
 		return this.getParameter(param);
 	}

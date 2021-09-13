@@ -6,6 +6,8 @@ import org.restlet.routing.Router;
 
 import resources.TravelResources;
 import resources.AllTravelsResources;
+import resources.BuyResources;
+import resources.TicketResources;
  
 public class RouterApplication extends Application{
 	/**
@@ -19,6 +21,8 @@ public class RouterApplication extends Application{
 		//Routes
 		router.attach("/travels", AllTravelsResources.class);
 		router.attach("/travels/{trainID}", TravelResources.class);
+		router.attach("/buy/{trainID}", BuyResources.class);
+		router.attach("/tickets/{ticketID}", TicketResources.class);
 		
 		return router;
 	}
