@@ -37,7 +37,18 @@ Icon=/home/USER/eclipse/icon.xpm
 
 où USER est toujours votre login.
 
-Après avoir enregistré ce fichier, attendez quelques instants que les modifications soient prises en compte, si vous utilisez GNOME comme environnement de bureau, les le lanceur d'Eclipse Photon devrait apparaître en une dizaine de secondes dans votre menu.
+Après avoir enregistré ce fichier, attendez quelques instants que les modifications soient prises en compte ; si vous utilisez GNOME comme environnement de bureau, le lanceur d'Eclipse Photon devrait apparaître en une dizaine de secondes dans votre menu.
+
+
+
+##### Installation et configuration du projet #####
+
+Cloner le projet : "git clone https://github.com/MicrowavedCat/Bouking.com"
+
+
+
+
+
 
 
 
