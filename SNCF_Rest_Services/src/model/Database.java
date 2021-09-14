@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -87,7 +86,7 @@ public class Database {
 	
 	public Ticket getTicketInfo(int ticketID) throws SQLException {
 		Statement stmt = CONNECTION.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Tickets WHERE ticket_id = " + ticketID);
+		ResultSet rs = stmt.executeQuery("SELECT * FROM Tickets NATURAL JOIN Travels WHERE ticket_id = " + ticketID);
 		Ticket ticket = null;
 		
 		while(rs.next()) {
@@ -100,7 +99,7 @@ public class Database {
 		return ticket;
 	}
 	
-	public void buy(int trainID, TicketClass ticketClass, boolean flexible, int price) throws SQLException {
+	public String buy(int trainID, TicketClass ticketClass, boolean flexible, int price) throws SQLException {
 		StringBuilder updateSql = new StringBuilder("UPDATE Travels SET ");
 		StringBuilder createSql = new StringBuilder("INSERT INTO Tickets (train_id, flexible, price, class) VALUES (" + trainID + ", " + flexible + ", " + price + ", " + ticketClass.toString() + ")");
 		
@@ -119,14 +118,22 @@ public class Database {
 		updateSql.append("WHERE train_id = " + trainID);
 		
 		Statement stmt = CONNECTION.createStatement();
+		String ticketID = null;
 		
-		if(stmt.executeUpdate(createSql.toString()) == 0)
+		if(stmt.executeUpdate(createSql.toString(), Statement.RETURN_GENERATED_KEYS) == 0)
 			throw new SQLException("Nothing inserted : inserted rows = 0");
+		
+		ResultSet rs = stmt.getGeneratedKeys();
+		
+		while(rs.next())
+			ticketID = Integer.toString(rs.getInt("ticketID"));
 		
 		if(stmt.executeUpdate(updateSql.toString()) == 0)
 			throw new SQLException("Nothing updated : updated rows = 0");
 		
 		stmt.close();
+		
+		return ticketID;
 	}
 	
 	public void close() {

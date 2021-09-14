@@ -82,4 +82,17 @@ public class Travel {
 		
 		return bp.make();
 	}
+
+	public boolean hasEnoughPlace(int nbPlaces, TicketClass ticketClass) {
+		switch(ticketClass) {
+			case FIRST:
+				return (this.ticketsFirst >= nbPlaces);
+			case BUSINESS:
+				return (this.ticketsBusiness >= nbPlaces);
+			case STANDARD:
+				return (this.ticketsStandard >= nbPlaces);
+		}
+		
+		return false;
+	}
 }

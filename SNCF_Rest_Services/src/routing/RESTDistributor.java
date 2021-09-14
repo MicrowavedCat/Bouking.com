@@ -14,7 +14,7 @@ public class RESTDistributor {
 	     Component component = new Component();
 
 	     //Prepare server on port 8080
-	     component.getServers().add(Protocol.HTTP, 8080);
+	     component.getServers().add(Protocol.HTTP, 8081);
 	     // Then attach it to the local host  
 	     component.getDefaultHost().attach(new RouterApplication());  
 

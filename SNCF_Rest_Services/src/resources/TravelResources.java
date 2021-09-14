@@ -9,6 +9,7 @@ import org.restlet.resource.ServerResource;
 
 import model.Database;
 import model.Travel;
+import utils.BasicReturn;
 import utils.Parameters;
 
 public class TravelResources extends ServerResource {
@@ -18,7 +19,7 @@ public class TravelResources extends ServerResource {
 		Parameters param = new Parameters(this);
 		
 		if(!param.isSet("trainID"))
-			throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The train ID must be given"));
+			return BasicReturn.make(false, "The train ID must be given");
 		
 		int trainID = param.getInt("trainID");
 		
@@ -27,7 +28,7 @@ public class TravelResources extends ServerResource {
 		} catch (SQLException e) {
 			System.err.println("Database connection error :");
 			e.printStackTrace();
-			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database error"));
+			return BasicReturn.make(false, "Database error");
 		}
 		
 		Travel travel;
@@ -36,11 +37,11 @@ public class TravelResources extends ServerResource {
 		} catch (SQLException e) {
 			System.err.println("Database request error :");
 			e.printStackTrace();
-			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database error"));
+			return BasicReturn.make(false, "Database error");
 		}
 		
 		if(travel == null)
-			throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The provided train ID does not correspond to any travel"));
+			return BasicReturn.make(false, "The provided train ID does not correspond to any travel");
 		
 		db.close();
 		return travel.toResponseBodyFormat();

@@ -10,6 +10,7 @@ import org.restlet.resource.ServerResource;
 import model.Database;
 import model.TicketClass;
 import model.Travel;
+import utils.BasicReturn;
 import utils.Parameters;
 
 public class AllTravelsResources extends ServerResource {
@@ -23,7 +24,7 @@ public class AllTravelsResources extends ServerResource {
 		} catch (SQLException e) {
 			System.err.println("Database connection error :");
 			e.printStackTrace();
-			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database error"));
+			return BasicReturn.make(false, "Database error");
 		}
 		
 		Travel[] travels = null;
@@ -36,21 +37,21 @@ public class AllTravelsResources extends ServerResource {
 				nbTicketsFirst = param.getInt("nbTicketsFirst");
 				
 				if(nbTicketsFirst < 1)
-					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of first class tickets requested cannot be inferior to 1"));
+					return BasicReturn.make(false, "The number of first class tickets requested cannot be inferior to 1");
 			}
 			
 			if(param.isSet("nbTicketsBusiness")) {
 				nbTicketsBusiness = param.getInt("nbTicketsBusiness");
 				
 				if(nbTicketsBusiness < 1)
-					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of business class tickets requested cannot be inferior to 1"));
+					return BasicReturn.make(false, "The number of business class tickets requested cannot be inferior to 1");
 			}
 			
 			if(param.isSet("nbTicketsStandard")) {
 				nbTicketsStandard = param.getInt("nbTicketsStandard");
 				
 				if(nbTicketsStandard < 1)
-					throw new ResourceException(new Status(Status.CLIENT_ERROR_BAD_REQUEST, "The number of standard class tickets requested cannot be inferior to 1"));
+					return BasicReturn.make(false, "The number of standard class tickets requested cannot be inferior to 1");
 			}
 
 			String departureStation = param.isSet("departureStation") ? param.getString("departureStation") : null;
@@ -70,7 +71,7 @@ public class AllTravelsResources extends ServerResource {
 		} catch (SQLException e) {
 			System.err.println("Database request error :");
 			e.printStackTrace();
-			throw new ResourceException(new Status(Status.SERVER_ERROR_INTERNAL, "Database error"));
+			return BasicReturn.make(false, "Database error");
 		}
 		
 		db.close();
