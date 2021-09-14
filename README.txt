@@ -4,7 +4,7 @@ Louka DOZ --- Julien CARCAU
 Les manipulations suivantes ont été réalisées sur un système Debian 11 avec Java 11.
 
 
-##### Installation de MariaDB : #####
+##### Installation de MariaDB et importation de la base de données #####
     sudo apt install mariadb-server
     sudo mysql_secure_installation
         définir un nouveau mot de passe root et conserver les autres choix par défaut
@@ -44,17 +44,9 @@ Après avoir enregistré ce fichier, attendez quelques instants que les modifica
 ##### Installation et configuration du projet #####
 
 Cloner le projet : "git clone https://github.com/MicrowavedCat/Bouking.com"
+Ouvrir Eclipse Photon et choisir comme workspace dossier "Bouking.com" du git fraîchement cloné.
 
+Après ouverture, plusieurs projets devraient être apparus sur la gauche.
+Dans "SNCF_Rest_Services/src/model/Database.java" et #################################, modifier l'adresse IP et les identifiants de la base de données en fonction de votre installation.
 
-
-
-
-
-
-
-
-
-
-Installer restlet framework (http://www-inf.telecom-sudparis.eu/SIMBAD/courses/doku.php?id=teaching_assistant:web_services:restful_helloworld).
-
-Changer tous les chemin absolus vers le jar restlet.
+Ensuite, faire un clic droit sur "SNCF_Rest_Services", puis cliquer sur Properties, Java Build Path, Libraries, Classpath. Ici, éditer les chemins de "org.restlet.jar" et "mariadb-java-client-2.7.4.jar" afin qu'ils pointent vers le bon dossier.
