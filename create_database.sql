@@ -18,8 +18,8 @@ CREATE TABLE Bookings (
 );
 INSERT INTO Users VALUES ("louka.doz@ensiie.fr", "Louka", "DOZ", "louka");
 INSERT INTO Users VALUES ("julien.carcau@ensiie.fr", "Julien", "CARCAU", "julien");
-INSERT INTO Bookings (user_id, ticket_id, web_service) VALUES ("louka.doz@ensiie.fr", 4789, "localhost:8080");
-INSERT INTO Bookings (user_id, ticket_id, web_service) VALUES ("julien.carcau@ensiie.fr", 1456, "localhost:8080");
+INSERT INTO Bookings (user_id, ticket_id, web_service) VALUES ("louka.doz@ensiie.fr", 4789, "localhost:8081");
+INSERT INTO Bookings (user_id, ticket_id, web_service) VALUES ("julien.carcau@ensiie.fr", 1456, "localhost:8081");
 
 CREATE DATABASE SNCF;
 USE SNCF;
