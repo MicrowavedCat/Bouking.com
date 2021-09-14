@@ -1,0 +1,86 @@
+<project folioSheetQuantity="0" title="" version="0.70">
+    <properties>
+        <property name="savedfilepath" show="1">/home/tardis/Git/Bouking.com/DB.qet</property>
+        <property name="saveddate" show="1">14/09/2021</property>
+        <property name="savedtime" show="1">19:04</property>
+        <property name="savedfilename" show="1">DB</property>
+    </properties>
+    <newdiagrams>
+        <border cols="17" rowsize="80" displaycols="true" colsize="60" rows="8" displayrows="true"/>
+        <inset plant="" locmach="" filename="" author="" indexrev="" date="null" folio="%id/%total" title="" auto_page_num="" version="" displayAt="bottom"/>
+        <conductors type="multi" condsize="1" vertirotatetext="270" vertical-alignment="AlignRight" numsize="7" horizrotatetext="0" horizontal-alignment="AlignBottom" displaytext="1" function="" tension-protocol="" onetextperfolio="0" bicolor="false" color2="#000000" dash-size="1" num="_" formula=""/>
+        <report label="%f-%l%c"/>
+        <xrefs>
+            <xref showpowerctc="false" master_label="%f-%l%c" delayprefix="" type="coil" slave_label="(%f-%l%c)" switchprefix="" offset="0" displayhas="cross" snapto="label" powerprefix=""/>
+            <xref showpowerctc="false" master_label="%f-%l%c" delayprefix="" type="commutator" slave_label="(%f-%l%c)" switchprefix="" offset="0" displayhas="cross" snapto="label" powerprefix=""/>
+            <xref showpowerctc="false" master_label="%f-%l%c" delayprefix="" type="protection" slave_label="(%f-%l%c)" switchprefix="" offset="0" displayhas="cross" snapto="label" powerprefix=""/>
+        </xrefs>
+        <conductors_autonums current_autonum="" freeze_new_conductors="false"/>
+        <folio_autonums/>
+        <element_autonums freeze_new_elements="false" current_autonum=""/>
+    </newdiagrams>
+    <diagram folio="%id/%total" colsize="60" freezeNewElement="false" filename="" author="" height="660" date="null" locmach="" displaycols="true" displayAt="bottom" rows="8" indexrev="" plant="" version="0.70" displayrows="true" freezeNewConductor="false" order="1" auto_page_num="" title="" rowsize="80" cols="17">
+        <defaultconductor type="multi" condsize="1" vertirotatetext="270" vertical-alignment="AlignRight" numsize="7" horizrotatetext="0" horizontal-alignment="AlignBottom" displaytext="1" function="" tension-protocol="" onetextperfolio="0" bicolor="false" color2="#000000" dash-size="1" num="_" formula=""/>
+        <inputs>
+            <input x="130" y="280" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>booking_id&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>user_id&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>ticket_id&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>web_service&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="130" y="140" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>mail&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>first_name&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>last_name&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>password&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="490" y="110" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Travels&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="440" y="350" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>ticket_id&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>train_id&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>flexible&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>price&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>class&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="490" y="320" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Tickets&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="190" y="110" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Users&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="180" y="250" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Bookings&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="180" y="60" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Boukings&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="440" y="140" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>train_id&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>departure_station&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>arrival_station&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>departure_date&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>arrival_date&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>base_price&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>nb_first_class&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>nb_business_class&lt;/p>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>nb_standard_class&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+            <input x="500" y="60" text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:0; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>SNCF&lt;/p>&lt;/body>&lt;/html>" rotation="0" font="Sans Serif,9,-1,5,0,0,0,0,0,0,normal"/>
+        </inputs>
+        <shapes>
+            <shape closed="0" x2="330" y2="380" type="Rectangle" rx="0" ry="0" y1="50" is_movable="1" z="0" x1="90">
+                <pen style="SolidLine" widthF="1" color="#000000"/>
+                <brush style="NoBrush" color="#000000"/>
+            </shape>
+            <shape closed="0" x2="620" y2="440" type="Rectangle" rx="0" ry="0" y1="310" is_movable="1" z="0" x1="420">
+                <pen style="SolidLine" widthF="1" color="#000000"/>
+                <brush style="NoBrush" color="#000000"/>
+            </shape>
+            <shape closed="0" x2="620" y2="290" type="Rectangle" rx="0" ry="0" y1="100" is_movable="1" z="0" x1="420">
+                <pen style="SolidLine" widthF="1" color="#000000"/>
+                <brush style="NoBrush" color="#000000"/>
+            </shape>
+            <shape closed="0" x2="310" y2="360" type="Rectangle" rx="0" ry="0" y1="240" is_movable="1" z="0" x1="110">
+                <pen style="SolidLine" widthF="1" color="#000000"/>
+                <brush style="NoBrush" color="#000000"/>
+            </shape>
+            <shape closed="0" x2="310" y2="220" type="Rectangle" rx="0" ry="0" y1="100" is_movable="1" z="0" x1="110">
+                <pen style="SolidLine" widthF="1" color="#000000"/>
+                <brush style="NoBrush" color="#000000"/>
+            </shape>
+            <shape closed="0" x2="640" y2="460" type="Rectangle" rx="0" ry="0" y1="50" is_movable="1" z="0" x1="400">
+                <pen style="SolidLine" widthF="1" color="#000000"/>
+                <brush style="NoBrush" color="#000000"/>
+            </shape>
+        </shapes>
+    </diagram>
+    <collection>
+        <category name="import">
+            <names>
+                <name lang="sl">Uvoženi elementi</name>
+                <name lang="da">Importerede elementer</name>
+                <name lang="ro">Elemente importate</name>
+                <name lang="es">Elementos importados</name>
+                <name lang="it">Elementi importati</name>
+                <name lang="el">Εισηγμένα στοιχεία</name>
+                <name lang="fr">Éléments importés</name>
+                <name lang="nl">Elementen geïmporteerd</name>
+                <name lang="cs">Zavedené prvky</name>
+                <name lang="hr">Uvezeni elementi</name>
+                <name lang="ca">Elements importats</name>
+                <name lang="ru">Импортированные элементы</name>
+                <name lang="de">Importierte elemente</name>
+                <name lang="pt">elementos importados</name>
+                <name lang="tr">İthal öğeler</name>
+                <name lang="en">Imported elements</name>
+                <name lang="pl">Elementy importowane</name>
+            </names>
+        </category>
+    </collection>
+</project>
