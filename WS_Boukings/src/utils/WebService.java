@@ -9,23 +9,11 @@ public class WebService {
 	public final static String SNCF = "localhost:8081";
 	
 	
-	public static String GET(String webService, String URI, String URIParam, HashMap<String, String> params) throws Exception {
+	public static String GET(String webService, String URI, String URIParam) throws Exception {
 		StringBuilder s = new StringBuilder("http://" + webService + URI);
 		
 		if(URIParam != null)
 			s.append("/" + URIParam);
-		
-		if(params != null && params.size() > 0) {
-			s.append("?");
-			
-			int i = 0;
-			params.forEach((k, v) -> {
-				s.append(k + "=" + v);
-				
-				if(i < params.size() - 1)
-					s.append("&");
-			});
-		}
 				
 		return new ClientResource(s.toString()).get().getText();
 	}

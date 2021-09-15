@@ -7,20 +7,14 @@ import model.BodyParser;
 import model.DBInstance;
 import model.Database;
 import model.TicketClass;
+import model.Travel;
 import model.User;
 import utils.BasicReturn;
+import utils.DateConverter;
 import utils.WebService;
 
 public class Bookings {
 	public String travels(String departureStation, String arrivalStation, long departureDate, long arrivalDate, int nbFirstCLass, int nbBusinessClass, int nbStandardClass){
-		HashMap<String, String> params = new HashMap<>();
-		if(departureStation != null && !departureStation.equals("")) params.put("departureStation", departureStation);
-		if(arrivalStation != null && !arrivalStation.equals("")) params.put("arrivalStation", arrivalStation);
-		if(departureDate > 0) params.put("departureDate", Long.toString(departureDate));
-		if(arrivalDate > 0) params.put("arrivalDate", Long.toString(arrivalDate));
-		if(nbFirstCLass > 0) params.put("nbTicketsFirst", Integer.toString(nbFirstCLass));
-		if(nbBusinessClass > 0) params.put("nbTicketsBusiness", Integer.toString(nbBusinessClass));
-		if(nbStandardClass > 0) params.put("nbTicketsStandard", Integer.toString(nbStandardClass));
 		System.out.println(departureStation);
 		System.out.println(arrivalStation);
 		System.out.println(departureDate);
@@ -30,14 +24,41 @@ public class Bookings {
 		System.out.println(nbStandardClass);
 		
 		try {
-			String res = WebService.GET(WebService.SNCF, "/travels", null, params);	
+			String res = WebService.GET(WebService.SNCF, "/travels", null);	
+			System.out.println(res);
 			BodyParser bp = new BodyParser(res);
 			
-			bp.next();
+			boolean go = bp.next();
 			if(bp.get("success") != null && bp.get("success").equals("false"))
 				return res;
+			
+			StringBuilder s = new StringBuilder();
+			while(go) {
+				System.out.println(departureStation + " " + bp.get("departureStation"));
+				System.out.println(arrivalStation + " " + bp.get("arrivalStation"));
+				System.out.println(departureDate + " " + bp.get("departureDate") + " " + DateConverter.getEndOfDay(departureDate));
+				System.out.println(arrivalDate + " " + bp.get("arrivalDate") + " " + DateConverter.getEndOfDay(arrivalDate));
+				System.out.println(nbFirstCLass + " " + bp.get("numberOfFirstClass"));
+				System.out.println(nbBusinessClass + " " + bp.get("numberOfBusinessClass"));
+				System.out.println(nbStandardClass + " " + bp.get("numberOfStandardClass"));
+				System.out.println();
 				
-			return res;
+				if(
+					( departureStation == null || departureStation.equals("") || departureStation.equals(bp.get("departureStation")) )
+					&& ( arrivalStation == null || arrivalStation.equals("") || arrivalStation.equals(bp.get("arrivalStation")) )
+					&& ( departureDate <= 0 || (departureDate <= Long.parseLong(bp.get("departureDate")) && DateConverter.getEndOfDay(departureDate) > Long.parseLong(bp.get("departureDate"))) )
+					&& ( arrivalDate <= 0 || (arrivalDate <= Long.parseLong(bp.get("arrivalDate")) && DateConverter.getEndOfDay(arrivalDate) > Long.parseLong(bp.get("arrivalDate"))) )
+					&& ( nbFirstCLass <= 0 || nbFirstCLass <= Integer.parseInt(bp.get("numberOfFirstClass")) )
+					&& ( nbBusinessClass <= 0 || nbBusinessClass <= Integer.parseInt(bp.get("numberOfBusinessClass")) )
+					&& ( nbStandardClass <= 0 || nbStandardClass <= Integer.parseInt(bp.get("numberOfStandardClass")) )
+				){
+					s.append(new Travel(bp).toResponseBodyFormat());
+				}
+
+				go = bp.next();
+			}
+				
+			return s.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return BasicReturn.make(false, "Could not communicate with other services");
@@ -46,7 +67,7 @@ public class Bookings {
 	
 	public String travel(int trainID){		
 		try {
-			String res = WebService.GET(WebService.SNCF, "/travels", Integer.toString(trainID), null);
+			String res = WebService.GET(WebService.SNCF, "/travels", Integer.toString(trainID));
 			BodyParser bp = new BodyParser(res);
 			
 			bp.next();

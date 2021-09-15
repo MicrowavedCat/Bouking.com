@@ -32,6 +32,7 @@ public class Output {
 
 	public static void displayTicket(Ticket t) {
 		Output.say("---------------------------------");
+		Output.say(t.getCompany());
 		Output.say(t.getDepartureStation() + "\t==>\t" + t.getArrivalStation());
 		Output.say(t.getFormattedDepartureDate() + "\t==>\t" + t.getFormattedArrivalDate());
 		Output.newLine();
@@ -47,9 +48,9 @@ public class Output {
 		Output.say(t.getFormattedDepartureDate() + "\t==>\t" + t.getFormattedArrivalDate());
 		Output.newLine();
 		Output.say("Supplément flexible : " + t.getFlexibleExtraPrice() + "€");
-		Output.say("Première classe : " + t.getFirstClassPrice() + "€\tFlexible : " + t.getFlexibleFirstClassPrice() + "\tPlaces : " + t.getNumberOfTicketsFirst());
-		Output.say("Classe business : " + t.getBusinessClassPrice() + "€\tFlexible : " + t.getFlexibleBusinessClassPrice() + "\tPlaces : " + t.getNumberOfTicketsBusiness());
-		Output.say("Classe standard : " + t.getStandardClassPrice() + "€\tFlexible : " + t.getFlexibleStandardClassPrice() + "\tPlaces : " + t.getNumberOfTicketsStandard());
+		Output.say("Première classe : " + t.getFirstClassPrice() + "€\tFlexible : " + t.getFlexibleFirstClassPrice() + "€\tPlaces : " + t.getNumberOfTicketsFirst());
+		Output.say("Classe business : " + t.getBusinessClassPrice() + "€\tFlexible : " + t.getFlexibleBusinessClassPrice() + "€\tPlaces : " + t.getNumberOfTicketsBusiness());
+		Output.say("Classe standard : " + t.getStandardClassPrice() + "€\tFlexible : " + t.getFlexibleStandardClassPrice() + "€\tPlaces : " + t.getNumberOfTicketsStandard());
 		Output.say("-------------------------------");
 	}
 }

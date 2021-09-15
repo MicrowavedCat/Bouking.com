@@ -35,40 +35,8 @@ public class Database {
 		return travel;
 	}
 	
-	public Travel[] getTravelsInfo(int nbTicketsFirst, int nbTicketsBusiness, int nbTicketsStandard, String departureStation, String arrivalStation, long departureDate, long arrivalDate) throws SQLException {
-		StringBuilder sql = new StringBuilder("SELECT * FROM Travels WHERE nb_first_class >= " + nbTicketsFirst + " AND nb_business_class >= " + nbTicketsBusiness + " AND nb_standard_class >= " + nbTicketsStandard);
-		
-		if(departureStation != null)
-			sql.append(" AND departure_station = '" + departureStation + "'");
-		
-		if(arrivalStation != null)
-			sql.append(" AND arrival_station = '" + arrivalStation + "'");
-		
-		if(departureDate > 0) {
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(departureDate);
-			
-			c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
-			c.set(Calendar.HOUR_OF_DAY, 0);
-			c.set(Calendar.MINUTE, 0);
-			c.set(Calendar.SECOND, 0);
-			c.set(Calendar.MILLISECOND, 0);
-			
-			sql.append(" AND departure_date >= " + departureDate + " AND departure_date < " + c.getTimeInMillis());
-		}
-		
-		if(arrivalDate > 0) {
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(arrivalDate);
-			
-			c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) + 1);
-			c.set(Calendar.HOUR_OF_DAY, 0);
-			c.set(Calendar.MINUTE, 0);
-			c.set(Calendar.SECOND, 0);
-			c.set(Calendar.MILLISECOND, 0);
-			
-			sql.append(" AND arrival_date >= " + arrivalDate + " AND arrival_date < " + c.getTimeInMillis());
-		}
+	public Travel[] getTravelsInfo() throws SQLException {
+		StringBuilder sql = new StringBuilder("SELECT * FROM Travels");
 		
 		Statement stmt = CONNECTION.createStatement();
 		ResultSet rs = stmt.executeQuery(sql.toString());

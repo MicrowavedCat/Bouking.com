@@ -113,7 +113,7 @@ public class Users {
 		if(bookings != null) {
 			for(Booking b : bookings) { 
 				try {
-					String res = WebService.GET(b.getWebService(), "/tickets", Integer.toString(b.getTicketID()), null);
+					String res = WebService.GET(b.getWebService(), "/tickets", Integer.toString(b.getTicketID()));
 					BodyParser bp = new BodyParser(res);
 					
 					bp.next();
