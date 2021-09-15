@@ -76,13 +76,13 @@ public class AllTravelsResources extends ServerResource {
 		
 		db.close();
 		
-		StringBuilder s = new StringBuilder();
+		StringBuilder s = new StringBuilder("");
 		
 		if(travels != null) {
 			for(Travel t : travels)
 				s.append(t.toResponseBodyFormat());
 		}
 		
-		return s.toString();
+		return (s.toString().equals("") ? BasicReturn.make(false, "No train found") : s.toString());
 	}
 }

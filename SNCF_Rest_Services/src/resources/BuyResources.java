@@ -12,18 +12,19 @@ import model.Database;
 import model.TicketClass;
 import model.Travel;
 import utils.BasicReturn;
+import utils.Parameters;
 
 public class BuyResources extends ServerResource {
-	//@Post
-	@Get
+	@Post
 	public String accept(Representation entity){	
 		Database db = null;
 		Form form = new Form(entity);
+		Parameters param = new Parameters(this);
 		
-		if(!form.contains("trainID"))
+		if(!param.isSet("trainID"))
 			return BasicReturn.make(false, "The train ID must be given");
 
-        int trainID = Integer.parseInt(form.getFirstValue("trainID"));
+        int trainID = param.getInt("trainID");
         boolean flexible = Boolean.parseBoolean(form.getFirstValue("flexible"));
         TicketClass ticketClass = TicketClass.toEnum(form.getFirstValue("ticketClass"));
 

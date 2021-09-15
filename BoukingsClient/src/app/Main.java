@@ -25,10 +25,10 @@ public class Main {
 		while(true) {
 			Output.say("Affinez votre recherche");
 			Output.say("gareDepart <gare>" + (gd.equals("") ? "" : " (" + gd + ")"));
-			Output.say("gareArrivée <gare>" + (ga.equals("") ? "" : " (" + ga + ")"));
-			Output.say("dateDepart <jour> <mois> <année> <heure> <minute>" + (dd < 0 ? "" : " (" + DateConvert.toString(dd) + ")"));
-			Output.say("dateArrivée <jour> <mois> <année> <heure> <minute>" + (da < 0 ? "" : " (" + DateConvert.toString(da) + ")"));
-			Output.say("nbPlacesPremièreClasse <nombre>" + (nbpc < 0 ? "" : " (" + nbpc + ")"));
+			Output.say("gareArrivee <gare>" + (ga.equals("") ? "" : " (" + ga + ")"));
+			Output.say("dateDepart" + (dd < 0 ? "" : " (" + DateConvert.toString(dd) + ")"));
+			Output.say("dateArrivee" + (da < 0 ? "" : " (" + DateConvert.toString(da) + ")"));
+			Output.say("nbPlacesPremiereClasse <nombre>" + (nbpc < 0 ? "" : " (" + nbpc + ")"));
 			Output.say("nbPlacesClasseBusiness <nombre>" + (nbbc < 0 ? "" : " (" + nbbc + ")"));
 			Output.say("nbPlacesClasseStandard <nombre>" + (nbsc < 0 ? "" : " (" + nbsc + ")"));
 			Output.say("ok : lancer la recherche");
@@ -40,6 +40,16 @@ public class Main {
 			if(choice.startsWith("ok"))
 				break;
 			
+			if(choice.startsWith("dateDepart")) {
+				dd = Input.askDate();
+				continue;
+			}
+
+			if(choice.startsWith("dateArrivee")) {
+				da = Input.askDate();
+				continue;
+			}
+			
 			if(index < 0 || index == choice.length() - 1)
 				continue;
 			
@@ -50,32 +60,30 @@ public class Main {
 				case "gareDepart":
 					gd = value;
 					break;
-				case "gareArrivée":
+				case "gareArrivee":
 					ga = value;
 					break;
 				case "dateDepart":
 					dd = Input.askDate();
 					break;
-				case "dateArrivée":
+				case "dateArrivee":
 					da = Input.askDate();
 					break;
-				case "nbPlacesPremièreClasse":
-					String s = Input.readString();
-					nbpc = (s.equals("") ? -1 : Integer.parseInt(s));
+				case "nbPlacesPremiereClasse":
+					nbpc = (value.equals("") ? -1 : Integer.parseInt(value));
 					break;
 				case "nbPlacesClasseBusiness":
-					String s1 = Input.readString();
-					nbbc = (s1.equals("") ? -1 : Integer.parseInt(s1));
+					nbbc = (value.equals("") ? -1 : Integer.parseInt(value));
 					break;
 				case "nbPlacesClasseStandard":
-					String s2 = Input.readString();
-					nbsc = (s2.equals("") ? -1 : Integer.parseInt(s2));
+					nbsc = (value.equals("") ? -1 : Integer.parseInt(value));
 					break;
 				default:
 					continue;
 			}
 		}
-		
+
+		//System.out.println(dd+" / "+da);
 		res = Bouking.getTravels(gd, ga, dd, da, nbpc, nbbc, nbsc);
 		
 		if(res == null) {
@@ -256,7 +264,7 @@ public class Main {
 				Output.ask("Prendre un billet retour ?");
 				
 				if(!Input.readString().equals("oui")) {
-					if(Bouking.buy(r, outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5]) == null) {
+					if(Bouking.buy(r, outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null) {
 						Output.displayError("Impossible de communiquer avec les services de Boukings.com");
 						System.exit(1);
 					}
@@ -278,7 +286,7 @@ public class Main {
 				if(returning == null)
 					continue;
 				
-				if(Bouking.buy(r, outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5]) == null || Bouking.buy(r2, returning[0], returning[1], returning[2], returning[3], returning[4], returning[5]) == null) {
+				if(Bouking.buy(r, outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null || Bouking.buy(r2, returning[0], returning[1], returning[2], returning[3], returning[4], returning[5], mail) == null) {
 					Output.displayError("Impossible de communiquer avec les services de Boukings.com");
 					System.exit(1);
 				}

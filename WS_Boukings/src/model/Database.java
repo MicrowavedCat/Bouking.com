@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Database {
 	private final static String URL = "jdbc:mariadb://192.168.192.5:3306/";
@@ -15,8 +16,17 @@ public class Database {
 	
 	private static Connection CONNECTION;
 	
+	private static HashMap<String, User> USERS = new HashMap<>();
+	private static HashMap<Integer, Booking> BOOKINGS = new HashMap<>();
+	
 	public Database() throws SQLException {
 		//CONNECTION = DriverManager.getConnection(URL + DB + "?user=" + USER + "&password=" + PASSWORD);
+		USERS.put("louka.doz@ensiie.fr", new User("louka.doz@ensiie.fr", "Louka", "DOZ", "louka"));
+		USERS.put("julien.carcau@ensiie.fr", new User("julien.carcau@ensiie.fr", "Julien", "CARCAU", "julien"));
+		
+		BOOKINGS.put(1, new Booking(1, 1, "louka.doz@ensiie.fr", "localhost:8081"));
+		BOOKINGS.put(2, new Booking(2, 2, "louka.doz@ensiie.fr", "localhost:8081"));
+		BOOKINGS.put(3, new Booking(3, 3, "julien.carcau@ensiie.fr", "localhost:8081"));
 	}
 	
 	public User getUserInfo(String mail) throws SQLException {
@@ -31,14 +41,7 @@ public class Database {
 		rs.close();
 		stmt.close();*/
 		
-		User user = null;
-		
-		if(mail.equals("louka.doz@ensiie.fr"))
-			user = new User("louka.doz@ensiie.fr", "Louka", "DOZ", "louka");
-		else if(mail.equals("julien.carcau@ensiie.fr"))
-			user = new User("julien.carcau@ensiie.fr", "Julien", "CARCAU", "julien");
-		
-		return user;
+		return USERS.get(mail);
 	}
 	
 	public Booking getBookingInfo(int bookingID) throws SQLException {
@@ -52,15 +55,8 @@ public class Database {
 		
 		rs.close();
 		stmt.close();*/
-
-		Booking booking = null;
 		
-		if(bookingID == 1)
-			booking = new Booking(bookingID, 4789, "louka.doz@ensiie.fr", "localhost:8081");
-		else if(bookingID == 2)
-			booking = new Booking(bookingID, 1456, "julien.carcau@ensiie.fr", "localhost:8081");
-		
-		return booking;
+		return BOOKINGS.get(bookingID);
 	}
 	
 	public Booking[] getUserBookingsInfo(String mail) throws SQLException {
@@ -79,18 +75,28 @@ public class Database {
 		
 		return (Booking[]) bookings.toArray(new Booking[bookings.size()]);*/
 		
-		Booking[] bookings = new Booking[0];
+		ArrayList<Integer> ids = new ArrayList<>();
 		
-		if(mail.equals("louka.doz@ensiie.fr")) {
-			bookings = new Booking[2];
-			bookings[0] = new Booking(1, 1, "louka.doz@ensiie.fr", "localhost:8081");
-			bookings[1] = new Booking(1, 2, "louka.doz@ensiie.fr", "localhost:8081");
-		} else if(mail.equals("julien.carcau@ensiie.fr")) {
-			bookings = new Booking[1];
-			bookings[0] = new Booking(2, 3, "julien.carcau@ensiie.fr", "localhost:8081");
-		}
+		BOOKINGS.forEach((k, v) -> {
+			System.out.println("FOREACH =========== "+k);
+			System.out.println(v);
+			if(v.getUserID().equals(mail))
+				ids.add(k);
+		});
+		
+		Booking[] bookings = new Booking[ids.size()];
+		
+		for(int i = 0; i < ids.size(); i++)
+			bookings[i] = BOOKINGS.get(ids.get(i));
 		
 		return bookings;
+	}
+	
+	public String addBooking(int ticketID, String userID, String webService) throws SQLException {
+		BOOKINGS.put(BOOKINGS.size() + 1, new Booking(BOOKINGS.size() + 1, ticketID, userID, webService));
+		System.out.println("ADD =========== "+BOOKINGS.size() + 1+" "+ticketID+" "+userID+" "+webService);
+		
+		return Integer.toString(BOOKINGS.size() + 1);
 	}
 	
 	public void close() {

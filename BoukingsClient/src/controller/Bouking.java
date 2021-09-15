@@ -14,18 +14,19 @@ public class Bouking {
 		try {
 			BookingsStub stub = new BookingsStub();
 			Travels resource = new Travels();
+
 			
 			if(departureStation != null) resource.setDepartureStation(departureStation);
 			if(arrivalStation != null) resource.setArrivalStation(arrivalStation);
 			if(departureDate >= 0) resource.setDepartureDate(departureDate);
 			else resource.setDepartureDate(0);
-			if(arrivalDate >= 0) resource.setArrivalDate(0);
+			if(arrivalDate >= 0) resource.setArrivalDate(arrivalDate);
 			else resource.setArrivalDate(0);
-			if(nbFirstClass >= 0) resource.setNbFirstCLass(0);
+			if(nbFirstClass >= 0) resource.setNbFirstCLass(nbFirstClass);
 			else resource.setNbFirstCLass(0);
-			if(nbBusinessCLass >= 0) resource.setNbBusinessClass(0);
+			if(nbBusinessCLass >= 0) resource.setNbBusinessClass(nbBusinessCLass);
 			else resource.setNbBusinessClass(0);
-			if(nbStandardClass >= 0) resource.setNbStandardClass(0);
+			if(nbStandardClass >= 0) resource.setNbStandardClass(nbStandardClass);
 			else resource.setNbStandardClass(0);
 			
 			res = stub.travels(resource).get_return();
@@ -60,7 +61,7 @@ public class Bouking {
 		return res;
 	}
 	
-	public static String buy(int trainID, int nbFirstClass, int nbFlexibleFirstClass, int nbBusinessClass, int nbFlexibleBusinessClass, int nbStandardClass, int nbFlexibleStandardClass) {
+	public static String buy(int trainID, int nbFirstClass, int nbFlexibleFirstClass, int nbBusinessClass, int nbFlexibleBusinessClass, int nbStandardClass, int nbFlexibleStandardClass, String mail) {
 		String res = null;
 		try {
 			for(int i = 0; i < nbFirstClass - nbFlexibleFirstClass; i++) {
@@ -71,9 +72,11 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("FIRST");
+				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
 
+				//System.out.println(res);
 				if(res == null)
 					return null;
 				
@@ -97,9 +100,11 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("FIRST");
+				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
-				
+
+				//System.out.println(res);
 				if(res == null)
 					return null;
 				
@@ -123,9 +128,11 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("BUSINESS");
+				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
-				
+
+				//System.out.println(res);
 				if(res == null)
 					return null;
 				
@@ -149,9 +156,11 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("BUSINESS");
+				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
-				
+
+				//System.out.println(res);
 				if(res == null)
 					return null;
 				
@@ -175,9 +184,11 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("STANDARD");
+				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
-				
+
+				//System.out.println(res);
 				if(res == null)
 					return null;
 				
@@ -201,9 +212,11 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("STANDARD");
+				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
-				
+
+				//System.out.println(res);
 				if(res == null)
 					return null;
 				

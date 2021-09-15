@@ -35,7 +35,7 @@ public class Output {
 		Output.say(t.getDepartureStation() + "\t==>\t" + t.getArrivalStation());
 		Output.say(t.getFormattedDepartureDate() + "\t==>\t" + t.getFormattedArrivalDate());
 		Output.newLine();
-		Output.say(t.getPrice() + "€");
+		Output.say(t.getPrice() + "€\t" + t.getTicketClass().toString());
 		if(t.isFlexible()) Output.say("Billet flexible");
 		Output.say("---------------------------------");
 	}

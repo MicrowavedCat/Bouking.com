@@ -2477,6 +2477,48 @@
                                }
                             
 
+                        /**
+                        * field for Mail
+                        */
+
+                        
+                                    protected java.lang.String localMail ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localMailTracker = false ;
+
+                           public boolean isMailSpecified(){
+                               return localMailTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getMail(){
+                               return localMail;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Mail
+                               */
+                               public void setMail(java.lang.String param){
+                            localMailTracker = true;
+                                   
+                                            this.localMail=param;
+                                    
+
+                               }
+                            
+
      
      
         /**
@@ -2580,6 +2622,24 @@
 
                                         
                                                    xmlWriter.writeCharacters(localFlexible);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localMailTracker){
+                                    namespace = "http://deployment.ws.tps";
+                                    writeStartElement(null, namespace, "mail", xmlWriter);
+                             
+
+                                          if (localMail==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localMail);
                                             
                                           }
                                     
@@ -2787,6 +2847,12 @@
                                  
                                          elementList.add(localFlexible==null?null:
                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFlexible));
+                                    } if (localMailTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
+                                                                      "mail"));
+                                 
+                                         elementList.add(localMail==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localMail));
                                     }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -2929,6 +2995,34 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setFlexible(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://deployment.ws.tps","mail").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setMail(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {

@@ -10,7 +10,7 @@ public class DateConvert {
 	
 	public static long toLong(int year, int month, int date, int hour, int minute, int second) {
 		Calendar c = Calendar.getInstance();
-		c.set(year, month, date, hour, minute, second);
+		c.set(year, month - 1, date, hour, minute, second);
 		
 		return c.getTimeInMillis();
 	}
