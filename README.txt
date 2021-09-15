@@ -42,7 +42,6 @@ Après avoir enregistré ce fichier, attendez quelques instants que les modifica
 
 
 ##### Installation et configuration du projet #####
-
 Cloner le projet : "git clone https://github.com/MicrowavedCat/Bouking.com"
 Ouvrir Eclipse Photon et choisir comme workspace dossier "Bouking.com" du git fraîchement cloné.
 
@@ -50,3 +49,11 @@ Après ouverture, plusieurs projets devraient être apparus sur la gauche.
 Dans "SNCF_Rest_Services/src/model/Database.java" et #################################, modifier l'adresse IP et les identifiants de la base de données en fonction de votre installation.
 
 Ensuite, faire un clic droit sur "SNCF_Rest_Services", puis cliquer sur Properties, Java Build Path, Libraries, Classpath. Ici, éditer les chemins de "org.restlet.jar" et "mariadb-java-client-2.7.4.jar" afin qu'ils pointent vers le bon dossier.
+
+Afin de configurer Tomcat, cliquer sur Servers (dans la partie basse), puis "No servers are available. Click this link to create a new server...", rechercher "Tomcat v9.0 Server" puis cliquer sur "Finish".
+
+
+
+##### Lancement du projet #####
+Clic droit sur RESTDistributor.java dans SNCF_Rest_Services --> src --> routing puis Run As, Java Application
+Puis clic droit sur WS_Boukings, Run As, Run On Server, sélectionner "Tomcat v9.0 Server at localhost" puis Next. Ici, vérifier que WS_Boukings est bien dans la colonne Configured, s'il est dans Available, l'ajouter dans Configured. Enfin, cliquer sur Finish.
