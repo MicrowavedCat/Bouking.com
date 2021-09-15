@@ -57,3 +57,17 @@ Afin de configurer Tomcat, cliquer sur Servers (dans la partie basse), puis "No 
 ##### Lancement du projet #####
 Clic droit sur RESTDistributor.java dans SNCF_Rest_Services --> src --> routing puis Run As, Java Application
 Puis clic droit sur WS_Boukings, Run As, Run On Server, sélectionner "Tomcat v9.0 Server at localhost" puis Next. Ici, vérifier que WS_Boukings est bien dans la colonne Configured, s'il est dans Available, l'ajouter dans Configured. Enfin, cliquer sur Finish.
+
+
+
+Auto-évaluation :
+# 	Requierments                                                                    Marks (20)
+1 	Create REST Train Filtering service B                                           5/6
+        Nous n'avons fait qu'un seul serveur REST pour le moment
+2 	Create SOAP Train Booking service A                                             3/4
+        L'authentification existe mais aucune vérification n'est effectuée par la suite afin de vérifier que l'utilisateur s'est bel et bien connecté
+3 	Interaction between two services                                                4/4
+4 	Test with Web service Client (instead of using Eclipse's Web service Explorer)  2/2
+5 	Work with complex data type (class, table, etc.)                                2/2
+6 	Work with database (in text file, xml, in mysql, etc.)                          1/2
+        Nous n'avons pas réussi à faire communiquer la partie SOAP avec la base de données
