@@ -37,6 +37,8 @@ public class WebService {
 				form.add(k, v);
 			});
 		}
+		
+		System.out.println(s.toString());
 				
 		return new ClientResource(s.toString()).post(form).getText();
 	}

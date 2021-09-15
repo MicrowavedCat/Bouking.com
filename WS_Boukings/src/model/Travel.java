@@ -19,7 +19,7 @@ public class Travel {
 	private long departureDate;
 	private long arrivalDate;
 	
-	public Travel(BodyParser bp) {
+	public Travel(String webService, BodyParser bp) {
 		this.trainID = Integer.parseInt(bp.get("trainID"));
 		this.ticketsFirst = Integer.parseInt(bp.get("numberOfFirstClass"));
 		this.ticketsBusiness = Integer.parseInt(bp.get("numberOfBusinessClass"));

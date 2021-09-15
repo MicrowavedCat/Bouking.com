@@ -14,7 +14,6 @@ public class Bouking {
 		try {
 			BookingsStub stub = new BookingsStub();
 			Travels resource = new Travels();
-
 			
 			if(departureStation != null) resource.setDepartureStation(departureStation);
 			if(arrivalStation != null) resource.setArrivalStation(arrivalStation);
@@ -70,6 +69,7 @@ public class Bouking {
 				Buy resource = new Buy();
 				res = null;
 				
+				System.out.println(webService);
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("FIRST");

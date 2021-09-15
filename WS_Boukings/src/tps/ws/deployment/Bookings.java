@@ -33,42 +33,36 @@ public class Bookings {
 				System.out.println(rtrn);
 				bp = new BodyParser(rtrn);
 				
-				bp.next();
+				boolean go = bp.next();
 				if(bp.get("success") != null && bp.get("success").equals("false"))
 					continue;
 				
-				res.append(rtrn);
-				System.out.println(res);
-			}
-			
-			bp = new BodyParser(res.toString());
-			boolean go = bp.next();
-			res = new StringBuilder();
-			
-			while(go) {
-				System.out.println(departureStation + " " + bp.get("departureStation"));
-				System.out.println(arrivalStation + " " + bp.get("arrivalStation"));
-				System.out.println(departureDate + " " + bp.get("departureDate") + " " + DateConverter.getEndOfDay(departureDate));
-				System.out.println(arrivalDate + " " + bp.get("arrivalDate") + " " + DateConverter.getEndOfDay(arrivalDate));
-				System.out.println(nbFirstCLass + " " + bp.get("numberOfFirstClass"));
-				System.out.println(nbBusinessClass + " " + bp.get("numberOfBusinessClass"));
-				System.out.println(nbStandardClass + " " + bp.get("numberOfStandardClass"));
-				System.out.println();
-				
-				if(
-					( departureStation == null || departureStation.equals("") || departureStation.equals(bp.get("departureStation")) )
-					&& ( arrivalStation == null || arrivalStation.equals("") || arrivalStation.equals(bp.get("arrivalStation")) )
-					&& ( departureDate <= 0 || (departureDate <= Long.parseLong(bp.get("departureDate")) && DateConverter.getEndOfDay(departureDate) > Long.parseLong(bp.get("departureDate"))) )
-					&& ( arrivalDate <= 0 || (arrivalDate <= Long.parseLong(bp.get("arrivalDate")) && DateConverter.getEndOfDay(arrivalDate) > Long.parseLong(bp.get("arrivalDate"))) )
-					&& ( nbFirstCLass <= 0 || nbFirstCLass <= Integer.parseInt(bp.get("numberOfFirstClass")) )
-					&& ( nbBusinessClass <= 0 || nbBusinessClass <= Integer.parseInt(bp.get("numberOfBusinessClass")) )
-					&& ( nbStandardClass <= 0 || nbStandardClass <= Integer.parseInt(bp.get("numberOfStandardClass")) )
-				){
-					res.append(new Travel(bp).toResponseBodyFormat());
-				}
+				while(go) {
+					System.out.println(departureStation + " " + bp.get("departureStation"));
+					System.out.println(arrivalStation + " " + bp.get("arrivalStation"));
+					System.out.println(departureDate + " " + bp.get("departureDate") + " " + DateConverter.getEndOfDay(departureDate));
+					System.out.println(arrivalDate + " " + bp.get("arrivalDate") + " " + DateConverter.getEndOfDay(arrivalDate));
+					System.out.println(nbFirstCLass + " " + bp.get("numberOfFirstClass"));
+					System.out.println(nbBusinessClass + " " + bp.get("numberOfBusinessClass"));
+					System.out.println(nbStandardClass + " " + bp.get("numberOfStandardClass"));
+					System.out.println();
+					
+					if(
+						( departureStation == null || departureStation.equals("") || departureStation.equals(bp.get("departureStation")) )
+						&& ( arrivalStation == null || arrivalStation.equals("") || arrivalStation.equals(bp.get("arrivalStation")) )
+						&& ( departureDate <= 0 || (departureDate <= Long.parseLong(bp.get("departureDate")) && DateConverter.getEndOfDay(departureDate) > Long.parseLong(bp.get("departureDate"))) )
+						&& ( arrivalDate <= 0 || (arrivalDate <= Long.parseLong(bp.get("arrivalDate")) && DateConverter.getEndOfDay(arrivalDate) > Long.parseLong(bp.get("arrivalDate"))) )
+						&& ( nbFirstCLass <= 0 || nbFirstCLass <= Integer.parseInt(bp.get("numberOfFirstClass")) )
+						&& ( nbBusinessClass <= 0 || nbBusinessClass <= Integer.parseInt(bp.get("numberOfBusinessClass")) )
+						&& ( nbStandardClass <= 0 || nbStandardClass <= Integer.parseInt(bp.get("numberOfStandardClass")) )
+					){
+						res.append(new Travel(s, bp).toResponseBodyFormat());
+					}
 
-				go = bp.next();
+					go = bp.next();
+				}
 			}
+			System.out.println(res.toString());
 				
 			return res.toString();
 		} catch (Exception e) {
@@ -106,7 +100,7 @@ public class Bookings {
 		
 		try {
 			//Cannot use POST because of org.restlet.resource.ResourceException: Method Not Allowed (405) - The method specified in the request is not allowed for the resource identified by the request URI
-			String res = WebService.POST(WebService.SNCF, "/buy", Integer.toString(trainID), params);
+			String res = WebService.POST(webService, "/buy", Integer.toString(trainID), params);
 			BodyParser bp = new BodyParser(res);
 			
 			bp.next();
@@ -122,7 +116,7 @@ public class Bookings {
 				
 				String bookingID = null;
 				try {	
-					bookingID = db.addBooking(Integer.parseInt(bp.get("reason")), mail, WebService.SNCF);
+					bookingID = db.addBooking(Integer.parseInt(bp.get("reason")), mail, webService);
 				} catch (SQLException e) {
 					System.err.println("Database request error :");
 					e.printStackTrace();
