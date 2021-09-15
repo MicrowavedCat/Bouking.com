@@ -101,7 +101,7 @@ public class Database {
 	
 	public String buy(int trainID, TicketClass ticketClass, boolean flexible, int price) throws SQLException {
 		StringBuilder updateSql = new StringBuilder("UPDATE Travels SET ");
-		StringBuilder createSql = new StringBuilder("INSERT INTO Tickets (train_id, flexible, price, class) VALUES (" + trainID + ", " + flexible + ", " + price + ", " + ticketClass.toString() + ")");
+		StringBuilder createSql = new StringBuilder("INSERT INTO Tickets (train_id, flexible, price, class) VALUES (" + trainID + ", " + flexible + ", " + price + ", '" + ticketClass.toString() + "')");
 		
 		switch(ticketClass) {
 			case FIRST:
@@ -111,11 +111,11 @@ public class Database {
 				updateSql.append("nb_business_class = nb_business_class - 1");
 				break;
 			case STANDARD:
-				updateSql.append("nb_standard_class = nb_standard_class - 1");
+				updateSql.append("nb_standard_class = nb_standard_class -1");
 				break;
 		}
 		
-		updateSql.append("WHERE train_id = " + trainID);
+		updateSql.append(" WHERE train_id = " + trainID);
 		
 		Statement stmt = CONNECTION.createStatement();
 		String ticketID = null;

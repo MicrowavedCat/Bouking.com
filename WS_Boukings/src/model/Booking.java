@@ -34,6 +34,10 @@ public class Booking {
 	public String getWebService() {
 		return this.webService;
 	}
+
+	public Object getUserID() {
+		return this.userID;
+	}
 	
 	public String toResponseBodyFormat() {
 		BodyParser bp = new BodyParser();

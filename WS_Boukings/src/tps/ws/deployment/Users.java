@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import model.BodyParser;
 import model.Booking;
+import model.DBInstance;
 import model.Database;
 import model.User;
 import utils.BasicReturn;
@@ -20,7 +21,7 @@ public class Users {
 			return BasicReturn.make(false, "The email password be given");
 		
 		try {
-			db = new Database();
+			db = DBInstance.getInstance();
 		} catch (SQLException e) {
 			System.err.println("Database connection error :");
 			e.printStackTrace();
@@ -58,7 +59,7 @@ public class Users {
 			return BasicReturn.make(false, "The email must be given");
 		
 		try {
-			db = new Database();
+			db = DBInstance.getInstance();
 		} catch (SQLException e) {
 			System.err.println("Database connection error :");
 			e.printStackTrace();
@@ -89,7 +90,7 @@ public class Users {
 			return BasicReturn.make(false, "The email must be given");
 		
 		try {
-			db = new Database();
+			db = DBInstance.getInstance();
 		} catch (SQLException e) {
 			System.err.println("Database connection error :");
 			e.printStackTrace();

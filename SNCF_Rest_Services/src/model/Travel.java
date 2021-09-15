@@ -58,6 +58,18 @@ public class Travel {
 		
 		return price;
 	}
+
+	public int getNumberOfTicketsFirst() {
+		return this.ticketsFirst;
+	}
+
+	public int getNumberOfTicketsBusiness() {
+		return this.ticketsBusiness;
+	}
+
+	public int getNumberOfTicketsStandard() {
+		return this.ticketsStandard;
+	}
 	
 	public String toResponseBodyFormat() {
 		BodyParser bp = new BodyParser();
