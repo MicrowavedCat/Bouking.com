@@ -11,7 +11,7 @@ import model.UserInfo;
 import utils.DateConvert;
 
 public class Main {
-	private static int buyTicket() {
+	private static BuyReturnMessage buyTicket() {
 		BodyParser bp;
 		String res;
 		String choice;
@@ -22,6 +22,7 @@ public class Main {
 		int nbpc = -1;
 		int nbbc = -1;
 		int nbsc = -1;
+		
 		while(true) {
 			Output.say("Affinez votre recherche");
 			Output.say("gareDepart <gare>" + (gd.equals("") ? "" : " (" + gd + ")"));
@@ -96,7 +97,7 @@ public class Main {
 		
 		if(bp.get("success") != null && bp.get("success").equals("false")) {
 			Output.displayError("Impossible de poursuivre : " + bp.get("reason"));
-			return -1;
+			return null;
 		}
 		
 		Travel[] travels = new Travel[bp.count()];
@@ -115,20 +116,20 @@ public class Main {
 			choice = Input.readString();
 			
 			if(choice.equals(""))
-				return -1;
+				return null;
 			
 			int c = Integer.parseInt(choice) - 1;
 			
 			if(c < 0 || c >= travels.length)
-				return -1;
+				return null;
 			
-			return travels[c].getTrainID();
+			return new Main.BuyReturnMessage(travels[c].getWebService(), travels[c].getTrainID());
 		} else {
 			Output.say("Aucun train trouvé...");
 			//Wait
 			Output.say("Appuyez sur ENTREE pour revenir au menu principal");
 			Input.readString();
-			return -1;
+			return null;
 		}
 	}
 	
@@ -248,9 +249,9 @@ public class Main {
 			String choice = Input.readString();
 
 			if(choice.equals("1")) {
-				int r = Main.buyTicket();
+				Main.BuyReturnMessage brm = Main.buyTicket();
 				
-				if(r < 0)
+				if(brm == null)
 					continue;
 				
 				int[] outbound = Main.askNumberOfTickets();
@@ -264,7 +265,7 @@ public class Main {
 				Output.ask("Prendre un billet retour ?");
 				
 				if(!Input.readString().equals("oui")) {
-					if(Bouking.buy(r, outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null) {
+					if(Bouking.buy(brm.getWebService(), brm.getTrainID(), outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null) {
 						Output.displayError("Impossible de communiquer avec les services de Boukings.com");
 						System.exit(1);
 					}
@@ -276,9 +277,9 @@ public class Main {
 					continue;
 				}
 				
-				int r2 = Main.buyTicket();
+				Main.BuyReturnMessage brm2 = Main.buyTicket();
 				
-				if(r2 < 0)
+				if(brm2 == null)
 					continue;
 				
 				int[] returning = Main.askNumberOfTickets();
@@ -286,7 +287,7 @@ public class Main {
 				if(returning == null)
 					continue;
 				
-				if(Bouking.buy(r, outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null || Bouking.buy(r2, returning[0], returning[1], returning[2], returning[3], returning[4], returning[5], mail) == null) {
+				if(Bouking.buy(brm.getWebService(), brm.getTrainID(), outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null || Bouking.buy(brm2.getWebService(), brm2.getTrainID(), returning[0], returning[1], returning[2], returning[3], returning[4], returning[5], mail) == null) {
 					Output.displayError("Impossible de communiquer avec les services de Boukings.com");
 					System.exit(1);
 				}
@@ -328,6 +329,24 @@ public class Main {
 				Output.say("Appuyez sur ENTREE pour revenir au menu principal");
 				Input.readString();
 			}
+		}
+	}
+	
+	private static class BuyReturnMessage {
+		private String webService;
+		private int trainID;
+		
+		public BuyReturnMessage(String webService, int trainID) {
+			this.webService = webService;
+			this.trainID = trainID;
+		}
+		
+		public String getWebService() {
+			return this.webService;
+		}
+		
+		public int getTrainID() {
+			return this.trainID;
 		}
 	}
 }	

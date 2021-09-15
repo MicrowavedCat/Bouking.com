@@ -7,7 +7,14 @@ import org.restlet.resource.ClientResource;
 
 public class WebService {
 	public final static String SNCF = "localhost:8081";
+	public final static String TRANSGABONAIS = "localhost:8082";
+	public final static String CAMRAIL = "localhost:8083";
 	
+	public static String[] getWebServices() {
+		String[] s = {SNCF, TRANSGABONAIS, CAMRAIL};
+		
+		return s;
+	}
 	
 	public static String GET(String webService, String URI, String URIParam) throws Exception {
 		StringBuilder s = new StringBuilder("http://" + webService + URI);

@@ -41,13 +41,14 @@ public class Bouking {
 		return res;
 	}
 	
-	public static String getTravel(int trainID) {		
+	public static String getTravel(String webService, int trainID) {		
 		String res = null;
 		try {
 			BookingsStub stub = new BookingsStub();
 			Travel resource = new Travel();
 			
 			resource.setTrainID(trainID);
+			resource.setWebService(webService);
 			
 			res = stub.travel(resource).get_return();
 		} catch (RemoteException e) {
@@ -61,7 +62,7 @@ public class Bouking {
 		return res;
 	}
 	
-	public static String buy(int trainID, int nbFirstClass, int nbFlexibleFirstClass, int nbBusinessClass, int nbFlexibleBusinessClass, int nbStandardClass, int nbFlexibleStandardClass, String mail) {
+	public static String buy(String webService, int trainID, int nbFirstClass, int nbFlexibleFirstClass, int nbBusinessClass, int nbFlexibleBusinessClass, int nbStandardClass, int nbFlexibleStandardClass, String mail) {
 		String res = null;
 		try {
 			for(int i = 0; i < nbFirstClass - nbFlexibleFirstClass; i++) {
@@ -72,6 +73,7 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("FIRST");
+				resource.setWebService(webService);
 				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
@@ -100,6 +102,7 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("FIRST");
+				resource.setWebService(webService);
 				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
@@ -128,6 +131,7 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("BUSINESS");
+				resource.setWebService(webService);
 				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
@@ -156,6 +160,7 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("BUSINESS");
+				resource.setWebService(webService);
 				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
@@ -184,6 +189,7 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("STANDARD");
+				resource.setWebService(webService);
 				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();
@@ -212,6 +218,7 @@ public class Bouking {
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("STANDARD");
+				resource.setWebService(webService);
 				resource.setMail(mail);
 				
 				res = stub.buy(resource).get_return();

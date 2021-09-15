@@ -24,15 +24,27 @@ public class Bookings {
 		System.out.println(nbStandardClass);
 		
 		try {
-			String res = WebService.GET(WebService.SNCF, "/travels", null);	
-			System.out.println(res);
-			BodyParser bp = new BodyParser(res);
+			String[] ws = WebService.getWebServices();
+			StringBuilder res = new StringBuilder();
+			BodyParser bp;
 			
+			for(String s: ws) {
+				String rtrn = WebService.GET(s, "/travels", null);	
+				System.out.println(rtrn);
+				bp = new BodyParser(rtrn);
+				
+				bp.next();
+				if(bp.get("success") != null && bp.get("success").equals("false"))
+					continue;
+				
+				res.append(rtrn);
+				System.out.println(res);
+			}
+			
+			bp = new BodyParser(res.toString());
 			boolean go = bp.next();
-			if(bp.get("success") != null && bp.get("success").equals("false"))
-				return res;
+			res = new StringBuilder();
 			
-			StringBuilder s = new StringBuilder();
 			while(go) {
 				System.out.println(departureStation + " " + bp.get("departureStation"));
 				System.out.println(arrivalStation + " " + bp.get("arrivalStation"));
@@ -52,22 +64,22 @@ public class Bookings {
 					&& ( nbBusinessClass <= 0 || nbBusinessClass <= Integer.parseInt(bp.get("numberOfBusinessClass")) )
 					&& ( nbStandardClass <= 0 || nbStandardClass <= Integer.parseInt(bp.get("numberOfStandardClass")) )
 				){
-					s.append(new Travel(bp).toResponseBodyFormat());
+					res.append(new Travel(bp).toResponseBodyFormat());
 				}
 
 				go = bp.next();
 			}
 				
-			return s.toString();
+			return res.toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return BasicReturn.make(false, "Could not communicate with other services");
 		}
 	}
 	
-	public String travel(int trainID){		
+	public String travel(String webService, int trainID){		
 		try {
-			String res = WebService.GET(WebService.SNCF, "/travels", Integer.toString(trainID));
+			String res = WebService.GET(webService, "/travels", Integer.toString(trainID));
 			BodyParser bp = new BodyParser(res);
 			
 			bp.next();
@@ -81,7 +93,7 @@ public class Bookings {
 		}
 	}
 	
-	public String buy(int trainID, String ticketClass, String flexible, String mail){		
+	public String buy(String webService, int trainID, String ticketClass, String flexible, String mail){		
 		boolean flexibleParse = Boolean.parseBoolean(flexible);
 		TicketClass ticketClassParse = TicketClass.toEnum(ticketClass);
 

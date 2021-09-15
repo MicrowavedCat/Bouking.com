@@ -15,6 +15,7 @@ public class Travel {
 	private int flexibleBusinessClassPrice;
 	private int flexibleStandardClassPrice;
 	private String company;
+	private String webService;
 	private String departureStation;
 	private String arrivalStation;
 	private long departureDate;
@@ -33,6 +34,7 @@ public class Travel {
 		this.flexibleBusinessClassPrice = Integer.parseInt(bp.get("flexibleBusinessClassPrice"));
 		this.flexibleStandardClassPrice = Integer.parseInt(bp.get("flexibleStandardClassPrice"));
 		this.company = bp.get("company");
+		this.webService = bp.get("webService");
 		this.departureStation = bp.get("departureStation");
 		this.arrivalStation = bp.get("arrivalStation");
 		this.departureDate = Long.parseLong(bp.get("departureDate"));
@@ -85,6 +87,10 @@ public class Travel {
 
 	public String getCompany() {
 		return this.company;
+	}
+
+	public String getWebService() {
+		return this.webService;
 	}
 
 	public String getDepartureStation() {

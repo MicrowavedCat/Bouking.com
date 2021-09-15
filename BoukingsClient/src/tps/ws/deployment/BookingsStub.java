@@ -1000,6 +1000,48 @@
             
 
                         /**
+                        * field for WebService
+                        */
+
+                        
+                                    protected java.lang.String localWebService ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localWebServiceTracker = false ;
+
+                           public boolean isWebServiceSpecified(){
+                               return localWebServiceTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getWebService(){
+                               return localWebService;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param WebService
+                               */
+                               public void setWebService(java.lang.String param){
+                            localWebServiceTracker = true;
+                                   
+                                            this.localWebService=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for TrainID
                         */
 
@@ -1102,7 +1144,25 @@
 
                
                    }
-                if (localTrainIDTracker){
+                if (localWebServiceTracker){
+                                    namespace = "http://deployment.ws.tps";
+                                    writeStartElement(null, namespace, "webService", xmlWriter);
+                             
+
+                                          if (localWebService==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localWebService);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localTrainIDTracker){
                                     namespace = "http://deployment.ws.tps";
                                     writeStartElement(null, namespace, "trainID", xmlWriter);
                              
@@ -1300,7 +1360,13 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localTrainIDTracker){
+                 if (localWebServiceTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
+                                                                      "webService"));
+                                 
+                                         elementList.add(localWebService==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localWebService));
+                                    } if (localTrainIDTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
                                                                       "trainID"));
                                  
@@ -1382,6 +1448,34 @@
                     
                     reader.next();
                 
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://deployment.ws.tps","webService").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setWebService(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -2349,6 +2443,48 @@
             
 
                         /**
+                        * field for WebService
+                        */
+
+                        
+                                    protected java.lang.String localWebService ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localWebServiceTracker = false ;
+
+                           public boolean isWebServiceSpecified(){
+                               return localWebServiceTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getWebService(){
+                               return localWebService;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param WebService
+                               */
+                               public void setWebService(java.lang.String param){
+                            localWebServiceTracker = true;
+                                   
+                                            this.localWebService=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for TrainID
                         */
 
@@ -2577,7 +2713,25 @@
 
                
                    }
-                if (localTrainIDTracker){
+                if (localWebServiceTracker){
+                                    namespace = "http://deployment.ws.tps";
+                                    writeStartElement(null, namespace, "webService", xmlWriter);
+                             
+
+                                          if (localWebService==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localWebService);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localTrainIDTracker){
                                     namespace = "http://deployment.ws.tps";
                                     writeStartElement(null, namespace, "trainID", xmlWriter);
                              
@@ -2829,7 +2983,13 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localTrainIDTracker){
+                 if (localWebServiceTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
+                                                                      "webService"));
+                                 
+                                         elementList.add(localWebService==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localWebService));
+                                    } if (localTrainIDTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
                                                                       "trainID"));
                                  
@@ -2929,6 +3089,34 @@
                     
                     reader.next();
                 
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://deployment.ws.tps","webService").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setWebService(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
