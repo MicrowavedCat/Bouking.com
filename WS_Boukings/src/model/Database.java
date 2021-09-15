@@ -24,8 +24,8 @@ public class Database {
 		USERS.put("louka.doz@ensiie.fr", new User("louka.doz@ensiie.fr", "Louka", "DOZ", "louka"));
 		USERS.put("julien.carcau@ensiie.fr", new User("julien.carcau@ensiie.fr", "Julien", "CARCAU", "julien"));
 		
-		BOOKINGS.put(1, new Booking(1, 1, "louka.doz@ensiie.fr", "localhost:8081"));
-		BOOKINGS.put(2, new Booking(2, 2, "louka.doz@ensiie.fr", "localhost:8081"));
+		//BOOKINGS.put(1, new Booking(1, 1, "louka.doz@ensiie.fr", "localhost:8081"));
+		//BOOKINGS.put(2, new Booking(2, 2, "louka.doz@ensiie.fr", "localhost:8081"));
 		BOOKINGS.put(3, new Booking(3, 3, "julien.carcau@ensiie.fr", "localhost:8081"));
 	}
 	

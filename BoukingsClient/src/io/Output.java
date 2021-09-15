@@ -22,7 +22,7 @@ public class Output {
 	
 	public static void displayLogo() {
 		Output.newLine();
-		System.out.println("Boukings.com");
+		System.out.println("Bouking.com");
 		Output.newLine();
 	}
 	
