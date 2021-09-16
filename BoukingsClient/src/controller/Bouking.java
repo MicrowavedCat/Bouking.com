@@ -7,9 +7,16 @@ import tps.ws.deployment.BookingsStub;
 import tps.ws.deployment.BookingsStub.Buy;
 import tps.ws.deployment.BookingsStub.Travel;
 import tps.ws.deployment.BookingsStub.Travels;
+import utils.BasicReturn;
 
 public class Bouking {
-	public static String getTravels(String departureStation, String arrivalStation, long departureDate, long arrivalDate, int nbFirstClass, int nbBusinessCLass, int nbStandardClass) {		
+	private String mail;
+	
+	public Bouking(String mail) {
+		this.mail = mail;
+	}
+	
+	public String getTravels(String departureStation, String arrivalStation, long departureDate, long arrivalDate, int nbFirstClass, int nbBusinessCLass, int nbStandardClass) {		
 		String res = null;
 		try {
 			BookingsStub stub = new BookingsStub();
@@ -40,7 +47,7 @@ public class Bouking {
 		return res;
 	}
 	
-	public static String getTravel(String webService, int trainID) {		
+	public String getTravel(String webService, int trainID) {		
 		String res = null;
 		try {
 			BookingsStub stub = new BookingsStub();
@@ -61,7 +68,7 @@ public class Bouking {
 		return res;
 	}
 	
-	public static String buy(String webService, int trainID, int nbFirstClass, int nbFlexibleFirstClass, int nbBusinessClass, int nbFlexibleBusinessClass, int nbStandardClass, int nbFlexibleStandardClass, String mail) {
+	public String buy(String webService, int trainID, int nbFirstClass, int nbFlexibleFirstClass, int nbBusinessClass, int nbFlexibleBusinessClass, int nbStandardClass, int nbFlexibleStandardClass) {
 		String res = null;
 		try {
 			for(int i = 0; i < nbFirstClass - nbFlexibleFirstClass; i++) {
@@ -69,24 +76,19 @@ public class Bouking {
 				Buy resource = new Buy();
 				res = null;
 				
-				System.out.println(webService);
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("FIRST");
 				resource.setWebService(webService);
-				resource.setMail(mail);
+				resource.setMail(this.mail);
 				
 				res = stub.buy(resource).get_return();
-
-				//System.out.println(res);
-				if(res == null)
-					return null;
 				
 				BodyParser bp = new BodyParser(res);
 				bp.next();
 				
 				if(bp.get("success") != null && bp.get("success").equals("false"))
-					return null;
+					return res;
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -103,19 +105,15 @@ public class Bouking {
 				resource.setFlexible("true");
 				resource.setTicketClass("FIRST");
 				resource.setWebService(webService);
-				resource.setMail(mail);
+				resource.setMail(this.mail);
 				
 				res = stub.buy(resource).get_return();
-
-				//System.out.println(res);
-				if(res == null)
-					return null;
 				
 				BodyParser bp = new BodyParser(res);
 				bp.next();
 				
 				if(bp.get("success") != null && bp.get("success").equals("false"))
-					return null;
+					return res;
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -132,19 +130,15 @@ public class Bouking {
 				resource.setFlexible("false");
 				resource.setTicketClass("BUSINESS");
 				resource.setWebService(webService);
-				resource.setMail(mail);
+				resource.setMail(this.mail);
 				
 				res = stub.buy(resource).get_return();
-
-				//System.out.println(res);
-				if(res == null)
-					return null;
 				
 				BodyParser bp = new BodyParser(res);
 				bp.next();
 				
 				if(bp.get("success") != null && bp.get("success").equals("false"))
-					return null;
+					return res;
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -161,19 +155,15 @@ public class Bouking {
 				resource.setFlexible("true");
 				resource.setTicketClass("BUSINESS");
 				resource.setWebService(webService);
-				resource.setMail(mail);
+				resource.setMail(this.mail);
 				
 				res = stub.buy(resource).get_return();
-
-				//System.out.println(res);
-				if(res == null)
-					return null;
 				
 				BodyParser bp = new BodyParser(res);
 				bp.next();
 				
 				if(bp.get("success") != null && bp.get("success").equals("false"))
-					return null;
+					return res;
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -190,19 +180,15 @@ public class Bouking {
 				resource.setFlexible("false");
 				resource.setTicketClass("STANDARD");
 				resource.setWebService(webService);
-				resource.setMail(mail);
+				resource.setMail(this.mail);
 				
 				res = stub.buy(resource).get_return();
-
-				//System.out.println(res);
-				if(res == null)
-					return null;
 				
 				BodyParser bp = new BodyParser(res);
 				bp.next();
 				
 				if(bp.get("success") != null && bp.get("success").equals("false"))
-					return null;
+					return res;
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -219,25 +205,21 @@ public class Bouking {
 				resource.setFlexible("true");
 				resource.setTicketClass("STANDARD");
 				resource.setWebService(webService);
-				resource.setMail(mail);
+				resource.setMail(this.mail);
 				
 				res = stub.buy(resource).get_return();
-
-				//System.out.println(res);
-				if(res == null)
-					return null;
 				
 				BodyParser bp = new BodyParser(res);
 				bp.next();
 				
 				if(bp.get("success") != null && bp.get("success").equals("false"))
-					return null;
+					return res;
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
-			return null;
+			return BasicReturn.make(false, "Cannot communicate with Bouking's services");
 		}
 			
-		return "ok";
+		return BasicReturn.make(true);
 	}
 }

@@ -8,10 +8,11 @@ import model.BodyParser;
 import model.Ticket;
 import model.Travel;
 import model.UserInfo;
+import utils.BasicReturn;
 import utils.DateConvert;
 
 public class Main {
-	private static BuyReturnMessage buyTicket() {
+	private static BuyReturnMessage buyTicket(Bouking bouking) {
 		BodyParser bp;
 		String res;
 		String choice;
@@ -85,7 +86,7 @@ public class Main {
 		}
 
 		//System.out.println(dd+" / "+da);
-		res = Bouking.getTravels(gd, ga, dd, da, nbpc, nbbc, nbsc);
+		res = bouking.getTravels(gd, ga, dd, da, nbpc, nbbc, nbsc);
 		
 		if(res == null) {
 			Output.displayError("Impossible de communiquer avec les services de Boukings.com");
@@ -204,17 +205,17 @@ public class Main {
 	
 	public static void main(String[] args) {
 		String res = null;
-		String mail = null;
 		BodyParser bp;
+		Account account = new Account();
 		
 		Output.displayLogo();
 		Output.say("Connectez-vous !");
 		
 		while(true) {
 			Output.ask("Addresse E-mail");
-			mail = Input.readString();
+			String mail = Input.readString();
 			Output.ask("Mot de passe");
-			res = Account.connect(mail, Input.readString());
+			res = account.connect(mail, Input.readString());
 			
 			if(res != null)
 				break;
@@ -222,7 +223,9 @@ public class Main {
 			Output.displayError("La connexion a échouée");
 		}
 		
-		res = Account.getUserInfo(mail);
+		Bouking bouking = new Bouking(account.getMail());
+		
+		res = account.getUserInfo();
 		
 		if(res == null) {
 			Output.displayError("Impossible de communiquer avec les services de Boukings.com");
@@ -249,7 +252,7 @@ public class Main {
 			String choice = Input.readString();
 
 			if(choice.equals("1")) {
-				Main.BuyReturnMessage brm = Main.buyTicket();
+				Main.BuyReturnMessage brm = Main.buyTicket(bouking);
 				
 				if(brm == null)
 					continue;
@@ -265,9 +268,17 @@ public class Main {
 				Output.ask("Prendre un billet retour ?");
 				
 				if(!Input.readString().equals("oui")) {
-					if(Bouking.buy(brm.getWebService(), brm.getTrainID(), outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null) {
+					BodyParser buyBp = new BodyParser(bouking.buy(brm.getWebService(), brm.getTrainID(), outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5]));
+					buyBp.next();
+					
+					if(buyBp.get("success") == null) {
 						Output.displayError("Impossible de communiquer avec les services de Boukings.com");
 						System.exit(1);
+					}
+					
+					if(buyBp.get("success").equals("false")) {
+						Output.displayError("Impossible de poursuivre : " + buyBp.get("reason"));
+						continue;
 					}
 					
 					Output.say("Billet aller simple acheté !");
@@ -277,7 +288,7 @@ public class Main {
 					continue;
 				}
 				
-				Main.BuyReturnMessage brm2 = Main.buyTicket();
+				Main.BuyReturnMessage brm2 = Main.buyTicket(bouking);
 				
 				if(brm2 == null)
 					continue;
@@ -287,9 +298,23 @@ public class Main {
 				if(returning == null)
 					continue;
 				
-				if(Bouking.buy(brm.getWebService(), brm.getTrainID(), outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5], mail) == null || Bouking.buy(brm2.getWebService(), brm2.getTrainID(), returning[0], returning[1], returning[2], returning[3], returning[4], returning[5], mail) == null) {
+				BodyParser buyBp1 = new BodyParser(bouking.buy(brm.getWebService(), brm.getTrainID(), outbound[0], outbound[1], outbound[2], outbound[3], outbound[4], outbound[5]));
+				BodyParser buyBp2 = new BodyParser(bouking.buy(brm2.getWebService(), brm2.getTrainID(), returning[0], returning[1], returning[2], returning[3], returning[4], returning[5]));
+				buyBp1.next();
+				buyBp1.next();
+				if(buyBp1.get("success") == null || buyBp1.get("success") == null) {
 					Output.displayError("Impossible de communiquer avec les services de Boukings.com");
 					System.exit(1);
+				}
+				
+				if(buyBp1.get("success").equals("false")) {
+					Output.displayError("Impossible de poursuivre : " + buyBp1.get("reason"));
+					continue;
+				}
+				
+				if(buyBp2.get("success").equals("false")) {
+					Output.displayError("Impossible de poursuivre : " + buyBp2.get("reason"));
+					continue;
 				}
 
 				Output.say("Billets aller et retour achetés !");
@@ -297,7 +322,7 @@ public class Main {
 				Output.say("Appuyez sur ENTREE pour revenir au menu principal");
 				Input.readString();
 			} else if(choice.equals("2")) {
-				res = Account.getUserTickets(mail);
+				res = account.getUserTickets();
 				
 				if(res == null) {
 					Output.displayError("Impossible de communiquer avec les services de Boukings.com");

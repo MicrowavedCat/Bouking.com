@@ -9,7 +9,13 @@ import tps.ws.deployment.UsersStub.User;
 import tps.ws.deployment.UsersStub.UserTickets;
 
 public class Account {
-	public static String connect(String mail, String password) {		
+	private String mail;
+	
+	public String getMail() {
+		return this.mail;
+	}
+	
+	public String connect(String mail, String password) {		
 		String res = null;
 		try {
 			UsersStub stub = new UsersStub();
@@ -30,16 +36,17 @@ public class Account {
 		BodyParser bp = new BodyParser(res);
 		bp.next();
 		
+		this.mail = mail;
 		return bp.get("token");
 	}
 	
-	public static String getUserInfo(String mail) {		
+	public String getUserInfo() {		
 		String res = null;
 		try {
 			UsersStub stub = new UsersStub();
 			User resource = new User();
 			
-			resource.setMail(mail);
+			resource.setMail(this.mail);
 			
 			res = stub.user(resource).get_return();
 		} catch (RemoteException e) {
@@ -53,13 +60,13 @@ public class Account {
 		return res;
 	}
 	
-	public static String getUserTickets(String mail) {		
+	public String getUserTickets() {		
 		String res = null;
 		try {
 			UsersStub stub = new UsersStub();
 			UserTickets resource = new UserTickets();
 			
-			resource.setMail(mail);
+			resource.setMail(this.mail);
 			
 			res = stub.userTickets(resource).get_return();
 		} catch (RemoteException e) {
