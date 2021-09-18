@@ -223,7 +223,7 @@ public class Main {
 			Output.displayError("La connexion a échouée");
 		}
 		
-		Bouking bouking = new Bouking(account.getMail());
+		Bouking bouking = new Bouking(account.getMail(), account.getAccessToken());
 		
 		res = account.getUserInfo();
 		

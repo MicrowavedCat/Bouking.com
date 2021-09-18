@@ -14,14 +14,14 @@ public class Database {
 	private final static String PASSWORD = "wsclient";
 	public final static String COMPANY = "Transgabonais";
 	
-	private static Connection CONNECTION;
+	private Connection connection;
 	
 	public Database() throws SQLException {
-		CONNECTION = DriverManager.getConnection(URL + COMPANY + "?user=" + USER + "&password=" + PASSWORD);
+		this.connection = DriverManager.getConnection(URL + COMPANY + "?user=" + USER + "&password=" + PASSWORD);
 	}
 	
 	public Travel getTravelInfo(int trainID) throws SQLException {
-		Statement stmt = CONNECTION.createStatement();
+		Statement stmt = this.connection.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Travels WHERE train_id = " + trainID);
 		Travel travel = null;
 		
@@ -38,7 +38,7 @@ public class Database {
 	public Travel[] getTravelsInfo() throws SQLException {
 		StringBuilder sql = new StringBuilder("SELECT * FROM Travels");
 		
-		Statement stmt = CONNECTION.createStatement();
+		Statement stmt = this.connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql.toString());
 		ArrayList<Travel> travels = new ArrayList<>();
 		
@@ -53,7 +53,7 @@ public class Database {
 	}
 	
 	public Ticket getTicketInfo(int ticketID) throws SQLException {
-		Statement stmt = CONNECTION.createStatement();
+		Statement stmt = this.connection.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM Tickets NATURAL JOIN Travels WHERE ticket_id = " + ticketID);
 		Ticket ticket = null;
 		
@@ -85,7 +85,7 @@ public class Database {
 		
 		updateSql.append(" WHERE train_id = " + trainID);
 		
-		Statement stmt = CONNECTION.createStatement();
+		Statement stmt = this.connection.createStatement();
 		String ticketID = null;
 		
 		if(stmt.executeUpdate(createSql.toString(), Statement.RETURN_GENERATED_KEYS) == 0)
@@ -106,7 +106,7 @@ public class Database {
 	
 	public void close() {
 		try {
-			CONNECTION.close();
+			this.connection.close();
 		} catch (SQLException e) {
 			System.err.println("Database close error");
 			e.printStackTrace();

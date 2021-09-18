@@ -11,9 +11,19 @@ import utils.BasicReturn;
 
 public class Bouking {
 	private String mail;
+	private String accessToken;
 	
-	public Bouking(String mail) {
+	public Bouking(String mail, String accessToken) {
 		this.mail = mail;
+		this.accessToken = accessToken;
+	}
+	
+	public String getMail() {
+		return this.mail;
+	}
+	
+	public String getAccessToken() {
+		return this.accessToken;
 	}
 	
 	public String getTravels(String departureStation, String arrivalStation, long departureDate, long arrivalDate, int nbFirstClass, int nbBusinessCLass, int nbStandardClass) {		
@@ -22,6 +32,7 @@ public class Bouking {
 			BookingsStub stub = new BookingsStub();
 			Travels resource = new Travels();
 			
+			resource.setAccessToken(this.accessToken);
 			if(departureStation != null) resource.setDepartureStation(departureStation);
 			if(arrivalStation != null) resource.setArrivalStation(arrivalStation);
 			if(departureDate >= 0) resource.setDepartureDate(departureDate);
@@ -52,7 +63,8 @@ public class Bouking {
 		try {
 			BookingsStub stub = new BookingsStub();
 			Travel resource = new Travel();
-			
+
+			resource.setAccessToken(this.accessToken);
 			resource.setTrainID(trainID);
 			resource.setWebService(webService);
 			
@@ -75,7 +87,8 @@ public class Bouking {
 				BookingsStub stub = new BookingsStub();
 				Buy resource = new Buy();
 				res = null;
-				
+
+				resource.setAccessToken(this.accessToken);
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("FIRST");
@@ -100,7 +113,8 @@ public class Bouking {
 				BookingsStub stub = new BookingsStub();
 				Buy resource = new Buy();
 				res = null;
-				
+
+				resource.setAccessToken(this.accessToken);
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("FIRST");
@@ -125,7 +139,8 @@ public class Bouking {
 				BookingsStub stub = new BookingsStub();
 				Buy resource = new Buy();
 				res = null;
-				
+
+				resource.setAccessToken(this.accessToken);
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("BUSINESS");
@@ -150,7 +165,8 @@ public class Bouking {
 				BookingsStub stub = new BookingsStub();
 				Buy resource = new Buy();
 				res = null;
-				
+
+				resource.setAccessToken(this.accessToken);
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("BUSINESS");
@@ -175,7 +191,8 @@ public class Bouking {
 				BookingsStub stub = new BookingsStub();
 				Buy resource = new Buy();
 				res = null;
-				
+
+				resource.setAccessToken(this.accessToken);
 				resource.setTrainID(trainID);
 				resource.setFlexible("false");
 				resource.setTicketClass("STANDARD");
@@ -200,7 +217,8 @@ public class Bouking {
 				BookingsStub stub = new BookingsStub();
 				Buy resource = new Buy();
 				res = null;
-				
+
+				resource.setAccessToken(this.accessToken);
 				resource.setTrainID(trainID);
 				resource.setFlexible("true");
 				resource.setTicketClass("STANDARD");

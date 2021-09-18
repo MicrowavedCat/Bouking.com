@@ -10,9 +10,14 @@ import tps.ws.deployment.UsersStub.UserTickets;
 
 public class Account {
 	private String mail;
+	private String accessToken;
 	
 	public String getMail() {
 		return this.mail;
+	}
+	
+	public String getAccessToken() {
+		return this.accessToken;
 	}
 	
 	public String connect(String mail, String password) {		
@@ -36,8 +41,12 @@ public class Account {
 		BodyParser bp = new BodyParser(res);
 		bp.next();
 		
+		if(bp.get("success") == null || bp.get("success").equals("false"))
+			return null;
+		
 		this.mail = mail;
-		return bp.get("token");
+		this.accessToken = bp.get("reason");
+		return this.accessToken;
 	}
 	
 	public String getUserInfo() {		
@@ -45,7 +54,8 @@ public class Account {
 		try {
 			UsersStub stub = new UsersStub();
 			User resource = new User();
-			
+
+			resource.setAccessToken(this.accessToken);
 			resource.setMail(this.mail);
 			
 			res = stub.user(resource).get_return();
@@ -65,7 +75,8 @@ public class Account {
 		try {
 			UsersStub stub = new UsersStub();
 			UserTickets resource = new UserTickets();
-			
+
+			resource.setAccessToken(this.accessToken);
 			resource.setMail(this.mail);
 			
 			res = stub.userTickets(resource).get_return();

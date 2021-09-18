@@ -127,7 +127,7 @@
      */
     public UsersStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/WS_Boukings/services/Users.UsersHttpSoap11Endpoint/" );
+                    this(configurationContext,"http://localhost:8080/WS_Bouking/services/Users.UsersHttpSoap11Endpoint/" );
                 
     }
 
@@ -136,7 +136,7 @@
      */
     public UsersStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/WS_Boukings/services/Users.UsersHttpSoap11Endpoint/" );
+                    this("http://localhost:8080/WS_Bouking/services/Users.UsersHttpSoap11Endpoint/" );
                 
     }
 
@@ -988,7 +988,7 @@
         }
         return false;
     }
-     //http://localhost:8080/WS_Boukings/services/Users.UsersHttpSoap11Endpoint/
+     //http://localhost:8080/WS_Bouking/services/Users.UsersHttpSoap11Endpoint/
         public static class UserResponse
         implements org.apache.axis2.databinding.ADBBean{
         
@@ -1447,6 +1447,48 @@
             
 
                         /**
+                        * field for AccessToken
+                        */
+
+                        
+                                    protected java.lang.String localAccessToken ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localAccessTokenTracker = false ;
+
+                           public boolean isAccessTokenSpecified(){
+                               return localAccessTokenTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getAccessToken(){
+                               return localAccessToken;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param AccessToken
+                               */
+                               public void setAccessToken(java.lang.String param){
+                            localAccessTokenTracker = true;
+                                   
+                                            this.localAccessToken=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for Mail
                         */
 
@@ -1546,7 +1588,25 @@
 
                
                    }
-                if (localMailTracker){
+                if (localAccessTokenTracker){
+                                    namespace = "http://deployment.ws.tps";
+                                    writeStartElement(null, namespace, "accessToken", xmlWriter);
+                             
+
+                                          if (localAccessToken==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localAccessToken);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localMailTracker){
                                     namespace = "http://deployment.ws.tps";
                                     writeStartElement(null, namespace, "mail", xmlWriter);
                              
@@ -1749,7 +1809,13 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localMailTracker){
+                 if (localAccessTokenTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
+                                                                      "accessToken"));
+                                 
+                                         elementList.add(localAccessToken==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAccessToken));
+                                    } if (localMailTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
                                                                       "mail"));
                                  
@@ -1831,6 +1897,34 @@
                     
                     reader.next();
                 
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://deployment.ws.tps","accessToken").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setAccessToken(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -3341,6 +3435,48 @@
             
 
                         /**
+                        * field for AccessToken
+                        */
+
+                        
+                                    protected java.lang.String localAccessToken ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localAccessTokenTracker = false ;
+
+                           public boolean isAccessTokenSpecified(){
+                               return localAccessTokenTracker;
+                           }
+
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getAccessToken(){
+                               return localAccessToken;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param AccessToken
+                               */
+                               public void setAccessToken(java.lang.String param){
+                            localAccessTokenTracker = true;
+                                   
+                                            this.localAccessToken=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for Mail
                         */
 
@@ -3440,7 +3576,25 @@
 
                
                    }
-                if (localMailTracker){
+                if (localAccessTokenTracker){
+                                    namespace = "http://deployment.ws.tps";
+                                    writeStartElement(null, namespace, "accessToken", xmlWriter);
+                             
+
+                                          if (localAccessToken==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localAccessToken);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localMailTracker){
                                     namespace = "http://deployment.ws.tps";
                                     writeStartElement(null, namespace, "mail", xmlWriter);
                              
@@ -3643,7 +3797,13 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localMailTracker){
+                 if (localAccessTokenTracker){
+                                      elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
+                                                                      "accessToken"));
+                                 
+                                         elementList.add(localAccessToken==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localAccessToken));
+                                    } if (localMailTracker){
                                       elementList.add(new javax.xml.namespace.QName("http://deployment.ws.tps",
                                                                       "mail"));
                                  
@@ -3725,6 +3885,34 @@
                     
                     reader.next();
                 
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("http://deployment.ws.tps","accessToken").equals(reader.getName())){
+                                
+                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
+                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
+                                    
+
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setAccessToken(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                            
+                                       } else {
+                                           
+                                           
+                                           reader.getElementText(); // throw away text nodes if any.
+                                       }
+                                      
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
