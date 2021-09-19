@@ -42,25 +42,32 @@ Après avoir enregistré ce fichier, attendez quelques instants que les modifica
 
 
 ##### Installation et configuration du projet #####
-Cloner le projet : "git clone https://github.com/MicrowavedCat/Bouking.com"
-Ouvrir Eclipse Photon et choisir comme workspace dossier "Bouking.com" du git fraîchement cloné.
+Extraire le dossier "Bouking.com" du dossier compressé.
+Ouvrir Eclipse Photon et choisir comme workspace, le dossier "Bouking.com" extrait ci-dessus.
 
 Après ouverture, plusieurs projets devraient être apparus sur la gauche.
-Dans "SNCF_Rest_Services/src/model/Database.java" et #################################, modifier l'adresse IP et les identifiants de la base de données en fonction de votre installation.
 
-Ensuite, faire un clic droit sur "SNCF_Rest_Services", puis cliquer sur Properties, Java Build Path, Libraries, Classpath. Ici, éditer les chemins de "org.restlet.jar" et "mariadb-java-client-2.7.4.jar" afin qu'ils pointent vers le bon dossier.
+Dans "SNCF_Rest_Services/src/model/Database.java", "Camrail_Rest_Services/src/model/Database.java" et "Transgabonais_Rest_Services/src/model/Database.java", modifier les variables statiques "URL", "USER" et "PASSWORD" en fonction de la configuration de votre base mariadb.
+Puis, ouvrir le fichier "WS_Bouking/Java Resources/src/model/Database.java" et modifier la variable statique FOLDER pour pointer correctement sur le dossier "databaseTables/", présent à la racine du projet.
+
+Ensuite, pour les 3 projets REST : SNCF_Rest_Services, Camrail_Rest_Services et Transgabonais_Rest_Services, faire un clic droit sur le projet, accéder à "Properties" > "Java Build Path" > "Libraries" > "Classpath". Ici, éditer les chemins de "org.restlet.jar" et "mariadb-java-client-2.7.4.jar" afin qu'ils pointent sur ceux présents dans le dossier vers "jars/" à la racine du projet.
 
 Afin de configurer Tomcat, cliquer sur Servers (dans la partie basse), puis "No servers are available. Click this link to create a new server...", rechercher "Tomcat v9.0 Server" puis cliquer sur "Finish".
 
 
 
 ##### Lancement du projet #####
-Clic droit sur RESTDistributor.java dans SNCF_Rest_Services --> src --> routing puis Run As, Java Application
-Puis clic droit sur WS_Boukings, Run As, Run On Server, sélectionner "Tomcat v9.0 Server at localhost" puis Next. Ici, vérifier que WS_Boukings est bien dans la colonne Configured, s'il est dans Available, l'ajouter dans Configured. Enfin, cliquer sur Finish.
+Clic droit sur "src/routing/RESTDistributor.java" > Run As > Java Application, et ceci pour les 3 APIs REST : "SNCF_Rest_Services", "Camrail_Rest_Services" et "Transgabonais_Rest_Services"
+Puis clic droit sur le projet WS_Bouking > Run As > Run On Server > sélectionner "Tomcat v9.0 Server at localhost", puis Next. Ici, vérifier que WS_Boukings est bien dans la colonne Configured, s'il est dans Available, l'ajouter dans Configured. Enfin, cliquer sur Finish.
+
+Vous pouvez lancer un client de test en cliquant sur "BoukingsClient/Java Resources/src/app/Main.java" > Run as > Java application.
+Vous pouvez utiliser les identifiants suivants : 
+	- login : "louka.doz@ensiie.fr", mot de passe : "louka"
+	- login : "julien.carcau@ensiie.fr", mot de passe : "julien"
 
 
 
-Auto-évaluation :
+Auto-évaluation (datant d'avant l'oral) :
 # 	Requierments                                                                    Marks (20)
 1 	Create REST Train Filtering service B                                           5/6
         Nous n'avons fait qu'un seul serveur REST pour le moment
