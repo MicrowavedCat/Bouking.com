@@ -30,7 +30,7 @@ public class TokenCheck {
 			return BasicReturn.make(false, "Unknown access token");
 		
 		if(token.getExpirationDate() <= DateConverter.getToday())
-			return BasicReturn.make(false, "Acss token has expired");
+			return BasicReturn.make(false, "Access token has expired");
 		
 		return BasicReturn.make(true);
 	}

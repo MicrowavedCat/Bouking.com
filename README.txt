@@ -12,7 +12,7 @@ Les manipulations suivantes ont été réalisées sur un système Debian 11 avec
     En étant toujours connecté sur la machine hébergeant MariaDB (si différente), se connecter à la base en tant que root :
     mysql -u root -p
 
-    Exécuter le contenu de "create_database.sql" puis revenir au terminal (bash).
+    Exécuter le contenu de "create_database.sql", présent à la racine du projet, puis revenir au terminal (bash).
 
     ==> Dans le cas d'une base de données sur une machine dédiée, différente de celle sur laquelle tourneront les webservices :
     Exécuter "sudo sed -i 's/^.*bind-address.*$/bind-address            = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf". Attention, cette commande a pour but de rendre accessible la base à d'autres personnes dans le même réseau, il faut donc veiller à utiliser un mot de passe fort.

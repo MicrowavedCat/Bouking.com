@@ -43,16 +43,7 @@ public class Bookings {
 				if(bp.get("success") != null && bp.get("success").equals("false"))
 					continue;
 				
-				while(go) {
-					System.out.println(departureStation + " " + bp.get("departureStation"));
-					System.out.println(arrivalStation + " " + bp.get("arrivalStation"));
-					System.out.println(departureDate + " " + bp.get("departureDate") + " " + DateConverter.getEndOfDay(departureDate));
-					System.out.println(arrivalDate + " " + bp.get("arrivalDate") + " " + DateConverter.getEndOfDay(arrivalDate));
-					System.out.println(nbFirstCLass + " " + bp.get("numberOfFirstClass"));
-					System.out.println(nbBusinessClass + " " + bp.get("numberOfBusinessClass"));
-					System.out.println(nbStandardClass + " " + bp.get("numberOfStandardClass"));
-					System.out.println();
-					
+				while(go) {					
 					if(
 						( departureStation == null || departureStation.equals("") || departureStation.equals(bp.get("departureStation")) )
 						&& ( arrivalStation == null || arrivalStation.equals("") || arrivalStation.equals(bp.get("arrivalStation")) )
