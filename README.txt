@@ -42,8 +42,8 @@ Après avoir enregistré ce fichier, attendez quelques instants que les modifica
 
 
 ##### Installation et configuration du projet #####
-Extraire le dossier "Bouking.com" du dossier compressé.
-Ouvrir Eclipse Photon et choisir comme workspace, le dossier "Bouking.com" extrait ci-dessus.
+Extraire le contenu du dossier compressé.
+Ouvrir Eclipse Photon et choisir comme workspace, le dossier dans lequel les fichiers ont été extrait.
 
 Après ouverture, plusieurs projets devraient être apparus sur la gauche.
 
