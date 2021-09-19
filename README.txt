@@ -42,8 +42,7 @@ Après avoir enregistré ce fichier, attendez quelques instants que les modifica
 
 
 ##### Installation et configuration du projet #####
-Extraire le contenu du dossier compressé.
-Ouvrir Eclipse Photon et choisir comme workspace, le dossier dans lequel les fichiers ont été extrait.
+Extraire le contenu du dossier compressé "workspace_content.zip" dans votre workspace.
 
 Après ouverture, plusieurs projets devraient être apparus sur la gauche.
 
